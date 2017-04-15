@@ -57,12 +57,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 
             _context.SaveChanges();
 
-            await _connectionManager.BroadcastAsync(new WebSocketMessageContext
-            {
-                Command = WebSocketCommands.DataSend,
-                Header = new RouteValueDictionary(new { pageupdated = model.Name }),
-                Value = page
-            });
+            await _connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(page.Content), 
+                new RouteValueDictionary(new { pageupdated = model.Name }));
 
             // update layout.cshtml if specified
             if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))

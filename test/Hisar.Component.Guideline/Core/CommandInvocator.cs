@@ -7,9 +7,14 @@ namespace Hisar.Component.Guideline.Core
 {
     public class CommandInvocator : IClientWebSocketCommandInvocator
     {
+        public CommandInvocator()
+        {
+
+        }
+
         public async Task InvokeAsync(WebSocketMessageContext context)
         {
-            if (context.MessageType == WebSocketMessageType.Text)
+            if (context.MessageType == WebSocketMessageType.Binary)
             {
                 object pageName = null;
                 if (context.Header.TryGetValue("pageupdated", out pageName))

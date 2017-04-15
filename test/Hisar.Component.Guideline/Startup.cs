@@ -46,6 +46,7 @@ namespace Hisar.Component.Guideline
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseStaticFiles();
             app.UseProxyWebSockets();
             app.UseMvc(ConfigureRoutes);
         }

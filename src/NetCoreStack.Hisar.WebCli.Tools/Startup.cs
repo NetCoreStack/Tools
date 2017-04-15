@@ -84,10 +84,10 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseNativeWebSockets();
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            app.UseNativeWebSockets();
 
             app.UseMvc(routes =>
             {

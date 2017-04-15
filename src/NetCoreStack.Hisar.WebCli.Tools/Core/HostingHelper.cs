@@ -26,10 +26,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             }
             catch (Exception ex)
             {
-                // noop
-            }
-            finally
-            {
                 port = HostingPort();
             }
 
