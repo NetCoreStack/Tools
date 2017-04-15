@@ -1,0 +1,29 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:1444/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "commandLineArgs": "--layout C:\\Users\\gedem\\Codes\\NetCoreStack.Tools\\test\\Hosting\\Views\\Shared\\_Layout.cshtml",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Hisar.WebCli": {
+      "commandName": "Project",
+      "commandLineArgs": "--appdir C:\\Users\\gedem\\Codes\\NetCoreStack.Tools\\test\\Hosting",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:50884"
+    }
+  }
+}
