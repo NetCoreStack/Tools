@@ -38,7 +38,7 @@ Remarks:
   Hisar WebCLI provides modular component development without dependencies.
   NetCoreStack.Hisar supports any standalone MVC app that it can be part of 
   hosting application package as a component. Please check out NetCoreStack.Hisar on Github for more details.
-  Each component-module should know what layout.cshtml looks like and then this tool manage it for you.
+  Each component-module should know what layout.cshtml looks like and then this tool can manage it for you.
   If you don't specify the main application directory it will create the default _Layout.cshtml page.
 
   For example: dotnet hisar --appdir <the-full-path-of-your-main-app>
