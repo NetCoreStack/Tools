@@ -8,6 +8,8 @@ If you don't specify the main application directory it will create the default _
 
 For example: dotnet hisar --appdir <the-full-path-of-your-main-app>
 
+![](https://github.com/NetCoreStack/Tools/blob/master/NetCoreStackTools.gif)
+
 ### Build
     Run pack.ps1 or pack.sh according to the OS to create Cli Tools nuget package.
     Run dotnet restore command on root directory (where the NetCoreStack.Tools.sln file)
