@@ -73,15 +73,19 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 var configuration = new ConfigurationBuilder()
                     .AddCommandLine(args).Build();
 
+                var contentRoot = Directory.GetCurrentDirectory();
+#if RELEASE
+                contentRoot = PathUtility.GetRootPath(true);
+#endif
                 var hostBuilder = new WebHostBuilder()
                     .UseConfiguration(configuration)
-                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseContentRoot(contentRoot)
                     .UseUrls(_urls.ToArray())
                     .UseKestrel(options => options.AddServerHeader = false)
                     .UseIISIntegration()
                     .UseStartup<Startup>();
 #if RELEASE
-                hostBuilder.UseWebRoot(PathUtility.GetWebRootPath());
+                hostBuilder.UseWebRoot(PathUtility.GetRootPath());
 #endif
                 var host = hostBuilder.Build();
 
@@ -108,6 +112,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             }
             catch (Exception ex)
             {
+                await _console.Out.WriteLineAsync("Exception: " + ex?.Message);
+
                 if (ex is TaskCanceledException || ex is OperationCanceledException)
                 {
                     // swallow when only exception is the CTRL+C forced an exit

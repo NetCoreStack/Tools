@@ -10,18 +10,23 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         private const string ContentFolderName = "content";
         private static string _layoutPagePath = string.Empty;
 
-        public static string GetWebRootPath()
+        public static string GetRootPath(bool isContentRoot = false)
         {
             var assemblyPath = Assembly.GetEntryAssembly().Location;
             var directory = Path.GetDirectoryName(assemblyPath);
             var directoryInfo = new DirectoryInfo(directory);
             do
             {
-                var path = Path.Combine(directoryInfo.FullName, "content", "wwwroot");
-                var webRoot = new DirectoryInfo(path);
-                if (webRoot.Exists)
+                var path = string.Empty;
+                if (isContentRoot)
+                    path = Path.Combine(directoryInfo.FullName, "content");
+                else
+                    path = Path.Combine(directoryInfo.FullName, "content", "wwwroot");
+                
+                var root = new DirectoryInfo(path);
+                if (root.Exists)
                 {
-                    return webRoot.FullName;
+                    return root.FullName;
                 }
 
                 directoryInfo = directoryInfo.Parent;
