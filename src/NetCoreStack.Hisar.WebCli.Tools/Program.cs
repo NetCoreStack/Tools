@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NetCoreStack.Hisar.WebCli.Tools.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
@@ -12,6 +16,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
     {
         private readonly IConsole _console;
         private readonly string _workingDir;
+        private List<string> _urls;
 
         public Program(IConsole console, string workingDir)
         {
@@ -29,6 +34,22 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             _workingDir = workingDir;
         }
 
+        private void ApplicationStarted()
+        {
+            Task.Run(() =>
+            {
+                var url = _urls.FirstOrDefault().Replace("*", "localhost");
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Process.Start("CMD.exe", "/C start \"\" " + url);
+                }
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+            });
+        }
+
         private async Task MainInternalAsync(string[] args)
         {
             var cmdOptions = CommandLineOptions.Parse(args, _console);
@@ -42,7 +63,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 }
             }
 
-            var urls = new List<string>()
+            _urls = new List<string>()
             {
                 $"http://*:{HostingHelper.GetHostingPort()}"
             };
@@ -55,7 +76,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 var hostBuilder = new WebHostBuilder()
                     .UseConfiguration(configuration)
                     .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseUrls(urls.ToArray())
+                    .UseUrls(_urls.ToArray())
                     .UseKestrel(options => options.AddServerHeader = false)
                     .UseIISIntegration()
                     .UseStartup<Startup>();
@@ -63,6 +84,9 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 hostBuilder.UseWebRoot(PathUtility.GetWebRootPath());
 #endif
                 var host = hostBuilder.Build();
+
+                var applicationLifetime = host.Services.GetService<IApplicationLifetime>();
+                applicationLifetime.ApplicationStarted.Register(ApplicationStarted);
                 host.Run();
             });
         }
