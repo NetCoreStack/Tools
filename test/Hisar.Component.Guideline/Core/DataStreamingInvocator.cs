@@ -2,8 +2,11 @@
 using NetCoreStack.Hisar;
 using NetCoreStack.WebSockets;
 using NetCoreStack.WebSockets.ProxyClient;
+using System.IO;
 using System.Net.WebSockets;
+using System.Text;
 using System.Threading.Tasks;
+using System;
 
 namespace Hisar.Component.Guideline.Core
 {
@@ -37,13 +40,13 @@ namespace Hisar.Component.Guideline.Core
                 if (context.Header.TryGetValue("pageupdated", out key))
                 {
                     var pageContent = context.Value?.ToString();
-                    //using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(pageContent)))
-                    //{
-                    //    var fullname = DefaultFileProvider.LayoutFullName;
-                    //    var name = Path.GetFileName(fullname);
-                    //    _layoutFileProvider.Layout = new InMemoryFileInfo(name, fullname, memoryStream.ToArray(), DateTime.UtcNow);
-                    //    _layoutFileProvider.RaiseChange(fullname);
-                    //}
+                    using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(pageContent)))
+                    {
+                        var fullname = DefaultFileProvider.LayoutFullName;
+                        var name = Path.GetFileName(fullname);
+                        _layoutFileProvider.Layout = new InMemoryFileInfo(name, fullname, memoryStream.ToArray(), DateTime.UtcNow);
+                        _layoutFileProvider.RaiseChange(fullname);
+                    }
                 }
             }
         }

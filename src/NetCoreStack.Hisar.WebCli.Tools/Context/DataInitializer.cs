@@ -31,7 +31,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Context
                 new Page
                 {
                     Content = pageContent,
-                    Name = HostingConstants.LayoutPageName,
+                    Name = HostingConstants.LayoutPageFullName,
                     PageType = PageType.Layout,
                     UpdatedDate = DateTime.Now
                 }

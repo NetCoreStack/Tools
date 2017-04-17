@@ -1,145 +1,301 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @*<title>@ViewData["Title"]</title>*@
+    <title>T.C. Başbakanlık Bilgi Sistemi</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Hisar &copy; Business Template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="~/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="~/js/jquery.js"></script>
-    <!-- Custom CSS -->
-    <style type="text/css">
-        body {
-            padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-        }
-
-        .navbar-fixed-top .nav {
-            padding: 15px 0;
-        }
-
-        .navbar-fixed-top .navbar-brand {
-            padding: 0 15px;
-        }
-
-        footer {
-            padding: 30px 0;
-        }
-
-        @@media(min-width:768px) {
-            body {
-                padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-            }
-
-            .navbar-fixed-top .navbar-brand {
-                padding: 15px 0;
-            }
-        }
-    </style>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Assets/css/basbakanlik-icons.css" rel="stylesheet">
+    <link href="/Assets/css/sweetalert.css" rel="stylesheet" />
+    <link href="/Assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="/Assets/css/style.css" rel="stylesheet">
+    <link href="http://cdn.basbakanlik.gov.tr/img/favicon.png" rel="icon" />
+    <link href="~/Assets/css/datepicker3.css" rel="stylesheet" />
+    <link href="~/Assets/css/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Assets/css/daterangepicker-bs3.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="~/Assets/Hisar/js/bimer-custom.min.js"></script>
+    <script src="~/Assets/Hisar/js/hisar-base.js"></script>
+    <script src="~/Assets/Hisar/js/bimer.js"></script>
+    <script src="~/Assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Assets/js/daterangepicker.js"></script>
+    @*<script src="~/Assets/js/jquery.autocomplete.min.js"></script>*@
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                    <img src="http://placehold.it/150x50&text=Logo" alt="">
-                </a>
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top ustMenu">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/Assets/images/logo.png" alt="" draggable="false"> T.C. Başbakanlık Bilgi Sistemi</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right ustSagMenu">
+                        <li class="hidden-sm"><a href="/"><i class="fa fa-home"></i> Ana Sayfa</a></li>
+                        <li class="ustSagMenuCizgi hidden-sm hidden-xs"></li>
+                        <li><a href="https://www.basbakanlik.gov.tr" target="_blank"><i class="bb bb-ayyildiz"></i> T.C. Başbakanlık</a></li>
+                        <li class="ustSagMenuCizgi hidden-xs"></li>
+                        <li><a href="http://www.resmigazete.gov.tr" target="_blank"><i class="bb bb-resmi-gazete"></i> Resmi Gazete</a></li>
+                        <li class="ustSagMenuCizgi hidden-xs"></li>
+                        <li><a href="http://www.mevzuat.gov.tr" target="_blank"><i class="bb bb-mevzuat"></i> Mevzuat</a></li>
+                        <li class="ustSagMenuCizgi hidden-xs"></li>
+                        <li><a href="https://eposta.basbakanlik.gov.tr/owa/" target="_blank" class="basbakanlikEposta"><i class="bb bb-eposta"></i> E-Posta</a></li>
+                        @*<li class="ustSagMenuCizgi hidden-sm"></li>
+                            <li><a href="#"><i class="fa fa-user-circle-o"></i> Oturum Açın</a></li>*@
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-    <!-- Page Content -->
-    <div class="container">
-        <!-- Heading Row -->
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+    <div id="siteGovdeUst" class="container">
         <div class="row">
-            <div class="col-md-8">
-                <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+            <div class="col-sm-12 col-md-8 sonTweetler">
+                @await Component.InvokeAsync("Twitter")
             </div>
-            <!-- /.col-md-8 -->
-            <div class="col-md-4">
-                <h1>Business Name or Tagline</h1>
-                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+            <div class="col-md-4 hidden-xs hidden-sm gazetelerdeBugun">
+                <a href="/gazete"><img class="img-responsive" draggable="false" src="/Assets/images/gazetelerde_bugun.png"></a>
             </div>
-            <!-- /.col-md-4 -->
         </div>
-        <!-- /.row -->
-        <hr>
-        <!-- Call to Action Well -->
+    </div>
+    <div id="siteGovde" class="container siteGovde">
         <div class="row">
-            <div class="col-lg-12">
+            <!-- sol alan -->
+            <div id="solAlan" class="col-lg-3 col-md-3 solAlan">
+
+                @await Component.InvokeAsync("BilgilendirmePanosu")
+
+                <div class="solMenu">
+                    <div>
+                        <a class="acilirMenu dropdown"><i class="bb bb-talep-bildirim"></i> Talep Bildirim <span class="caret"></span></a>
+                        @await Component.InvokeAsync("TalepBildirim")
+                    </div>
+                    <div>
+                        <a href="/sayfa/etik-ilkeler-1"><i class="fa fa-list-ul"></i> Etik İlkeler</a>
+                    </div>
+                    <div>
+                        <a href="http://boslojman.proje" target="_blank"><i class="fa fa-building-o"></i> Lojman İşlemleri</a>
+                    </div>
+                </div>
+
+                <div class="solLinkler">
+                    <a href="http://basbakanlik.proje/PerBilgi/" target="_blank" class="perbis">PERBİS <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/projeler" class="ebys">PROJELER <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/sayfa/ebys-2" class="projeler">EBYS <i class="fa fa-arrow-circle-right"></i></a>
+                    @*<a href="#" class="anketler">ANKETLER<i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="#" class="dokumanlar">DOKÜMANLAR <i class="fa fa-arrow-circle-right"></i></a>*@
+                </div>
+
+                @*<div class="solKutular">
+
+                        <div class="toplantiKutu">
+                            <a href="#">TOPLANTI ODASI<br>REZERVASYONLARI</a>
+                        </div>
+
+                        <div class="nobetListesiKutu">
+                            <a href="#">NÖBET LİSTESİ</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>*@
+
+                @await Component.InvokeAsync("OneriKutusu")
+                @*@await Component.InvokeAsync("Guideline")*@
+            </div>
+            <!-- orta alan -->
+            <div id="ortaAlan" class="col-lg-9 col-md-9 ortaAlan">
                 @RenderBody()
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
-        <!-- Content Row -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Heading 1</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4">
-                <h2>Heading 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4">
-                <h2>Heading 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-        </div>
-        <!-- /.row -->
-        <!-- Footer -->
-        <footer>
+    </div>
+
+    <footer>
+        <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Hisar 2017</p>
+                <div class="col-sm-6">
+                    T.C. Başbakanlık Bilgi Sistemi • @DateTime.Now.Year
+                </div>
+                <div class="col-sm-6">
+                    <ul class="sosyalAglar">
+                        <li><a class="sosyalAgFacebook" href="https://www.facebook.com/tcbasbakan" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="sosyalAgTwitter" href="https://twitter.com/TC_Basbakan" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="sosyalAgYoutube" href="https://www.youtube.com/channel/UCZrpYvf21wsCQjHhJ6HhGhQ" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                        <li><a class="sosyalAgYoutube" href="https://www.instagram.com/tc_basbakan/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
-    <!-- /.container -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/js/bootstrap.min.js"></script>
+        </div>
+    </footer>
+
+    <script src="/Assets/js/isMobile.min.js"></script>
+    <script src="/Assets/js/sweetalert.min.js"></script>
+    <script src="/Assets/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <script>
+
+        if (isMobile.any) {
+            $("#solAlan").before($("#ortaAlan"));
+            $("#siteGovdeUst").before($("#siteGovde"));
+
+            if ($('.anaSayfa').length) {
+                $(".anaSayfa").before($("#telefonRehberiKutusu"));
+            }
+        }
+
+
+        $('.solMenu .acilirMenu').click(function () {
+
+            var that = $(this);
+            var all = $('.solMenu .acilirMenu');
+
+            if (that.hasClass('dropdown')) {
+
+                all.parent().children('ul').slideUp();
+                all.removeClass('dropup');
+                all.addClass('dropdown');
+
+                that.parent().children('ul').slideDown();
+
+                that.removeClass('dropdown');
+                that.addClass('dropup');
+            }
+            else if (that.hasClass('dropup')) {
+                that.parent().children('ul').slideUp();
+                that.removeClass('dropup');
+                that.addClass('dropdown');
+            }
+        });
+
+        $('.yemekListesiIcerik i.bb-fotograf').on('mouseover', function () {
+            var imgDiv = $(this).parent().find('.yemekListesiFotograf');
+            imgDiv.fadeIn();
+        });
+
+        $('.yemekListesiIcerik i.bb-fotograf').on('mouseleave', function () {
+            var imgDiv = $(this).parent().find('.yemekListesiFotograf');
+            imgDiv.fadeOut('fast');
+        });
+
+        $('.input-date input').daterangepicker({
+            "singleDatePicker": true,
+            "timePicker": false,
+            "locale": {
+                "format": "DD.MM.YYYY",
+                "separator": " - ",
+                "applyLabel": "Uygula",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "Dan",
+                "toLabel": "a",
+                "customRangeLabel": "Seç",
+                "daysOfWeek": [
+                    "Pt",
+                    "Sl",
+                    "Çr",
+                    "Pr",
+                    "Cm",
+                    "Ct",
+                    "Pz"
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 1
+            }
+        }, function (start, end, label) {
+            console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+
+        $('.input-datetimerange input').daterangepicker({
+            "singleDatePicker": true,
+            "timePicker": true,
+            "timePicker24Hour": true,
+            //"startDate": "10/01/2017 13:30",
+            "locale": {
+                "format": "DD.MM.YYYY HH:mm",
+                "separator": " - ",
+                "applyLabel": "Uygula",
+                "cancelLabel": "Vazgeç",
+                "fromLabel": "Dan",
+                "toLabel": "a",
+                "customRangeLabel": "Seç",
+                "daysOfWeek": [
+                    "Pt",
+                    "Sl",
+                    "Çr",
+                    "Pr",
+                    "Cm",
+                    "Ct",
+                    "Pz"
+                ],
+                "monthNames": [
+                    "Ocak",
+                    "Şubat",
+                    "Mart",
+                    "Nisan",
+                    "Mayıs",
+                    "Haziran",
+                    "Temmuz",
+                    "Ağustos",
+                    "Eylül",
+                    "Ekim",
+                    "Kasım",
+                    "Aralık"
+                ],
+                "firstDay": 1
+            }
+        }, function (start, end, label) {
+            console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+    </script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        // tracker methods like "setCustomDimension" should be called before "trackPageView"
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//10.1.1.10/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Piwik Code -->
     @RenderSection("scripts", required: false)
 </body>
 </html>

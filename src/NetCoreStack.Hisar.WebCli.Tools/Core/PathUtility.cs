@@ -41,14 +41,15 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         {
             if (string.IsNullOrEmpty(_layoutPagePath))
             {
-                var files = Directory.GetFiles(directory, HostingConstants.LayoutPageName, SearchOption.AllDirectories);
+                var name = Path.GetFileName(HostingConstants.LayoutPageFullName);
+                var files = Directory.GetFiles(directory, name, SearchOption.AllDirectories);
                 if (files.Any())
                 {
                     _layoutPagePath = files.FirstOrDefault();
                     return _layoutPagePath;
                 }
 
-                var message = $"Ex: {HostingConstants.LayoutPageName} could not be located in {directory}";
+                var message = $"Ex: {HostingConstants.LayoutPageFullName} could not be located in {directory}";
                 throw new Exception(message);
             }
 

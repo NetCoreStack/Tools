@@ -10,7 +10,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 
         private static int HostingPort(int defaultPort = 0)
         {
-            var listener = new TcpListener(IPAddress.Loopback, defaultPort);
+            var listener = new TcpListener(IPAddress.Any, defaultPort);
             listener.Start();
             var port = ((IPEndPoint)listener.LocalEndpoint).Port;
             listener.Stop();

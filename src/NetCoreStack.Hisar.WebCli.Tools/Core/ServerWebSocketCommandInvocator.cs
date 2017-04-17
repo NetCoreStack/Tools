@@ -35,7 +35,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                         {
                             var page = db.Set<Page>().FirstOrDefault(x => x.PageType == PageType.Layout);
                             await _connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(page.Content),
-                                new RouteValueDictionary(new { pageupdated = page.Name }));
+                                new RouteValueDictionary(new { fileupdated = page.Name }));
                         }
                     }
                 }
