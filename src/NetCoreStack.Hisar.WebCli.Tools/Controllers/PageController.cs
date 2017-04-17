@@ -59,8 +59,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 
             await _connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(page.Content), 
                 new RouteValueDictionary(new { pageupdated = model.Name }));
-
-            // update layout.cshtml if specified
+            
             if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
             {
                 var layoutPagePath = PathUtility.GetLayoutPagePath(HostingHelper.MainAppDirectory);
