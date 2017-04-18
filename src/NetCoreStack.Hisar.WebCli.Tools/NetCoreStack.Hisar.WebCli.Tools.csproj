@@ -8,6 +8,23 @@
     <OutputType>exe</OutputType>
     <PackageType>DotnetCliTool</PackageType>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\css\sidebar.css" />
+    <Content Include="wwwroot\css\site.css" />
+    <Content Include="wwwroot\img\file_sprite.png" />
+    <Content Include="wwwroot\vendor\jstree\jstree.js" />
+    <Content Include="wwwroot\vendor\jstree\jstree.min.js" />
+    <Content Include="wwwroot\vendor\jstree\themes\default-dark\32px.png" />
+    <Content Include="wwwroot\vendor\jstree\themes\default-dark\40px.png" />
+    <Content Include="wwwroot\vendor\jstree\themes\default-dark\style.css" />
+    <Content Include="wwwroot\vendor\jstree\themes\default-dark\style.min.css" />
+    <Content Include="wwwroot\vendor\jstree\themes\default-dark\throbber.gif" />
+    <Content Include="wwwroot\vendor\jstree\themes\default\32px.png" />
+    <Content Include="wwwroot\vendor\jstree\themes\default\40px.png" />
+    <Content Include="wwwroot\vendor\jstree\themes\default\style.css" />
+    <Content Include="wwwroot\vendor\jstree\themes\default\style.min.css" />
+    <Content Include="wwwroot\vendor\jstree\themes\default\throbber.gif" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />

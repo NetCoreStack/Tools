@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NetCoreStack.Hisar.WebCli.Tools.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -74,6 +76,50 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             }
 
             return _layoutPagePath;
+        }
+
+        public static List<JsTreeDataModel> TreeList = new List<JsTreeDataModel>();
+        // TODO Cache
+        public static List<JsTreeDataModel> WalkDirectoryTree(DirectoryInfo directory, JsTreeDataModel tree)
+        {
+            FileInfo[] files = null;
+            DirectoryInfo[] subDirs = null;
+
+            files = directory.GetFiles("*.*");
+
+            if (files != null)
+            {
+                foreach (FileInfo fi in files)
+                {
+                    var extension = fi.Extension.Replace(".", "-");
+                    tree.Children.Add(new JsTreeDataModel
+                    {
+                        Text = fi.Name,
+                        Id = fi.FullName,
+                        Icon = "file file" + extension,
+                        Type = "file"
+                    });
+                }                
+            }
+
+            subDirs = directory.GetDirectories();
+
+            foreach (DirectoryInfo dirInfo in subDirs)
+            {
+                var subDirectory = new JsTreeDataModel
+                {
+                    Text = dirInfo.Name,
+                    Id = dirInfo.FullName,
+                    Opened = "false",
+                    Type = "root"
+                };
+
+                tree.Children.Add(subDirectory);
+                // Resursive call for each subdirectory.
+                WalkDirectoryTree(dirInfo, subDirectory);
+            }
+            
+            return TreeList;
         }
     }
 }

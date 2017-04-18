@@ -54,12 +54,23 @@ namespace NetCoreStack.Hisar.WebCli.Tools
         {
             var cmdOptions = CommandLineOptions.Parse(args, _console);
             var appdir = cmdOptions.MainAppDirectory.Value();
+            var staticServe = cmdOptions.StaticServe.Value();
+
             if (!string.IsNullOrEmpty(appdir))
             {
                 if (Directory.Exists(appdir))
                 {
                     _console.Out.WriteLine("Main application directory is: " + appdir);
                     HostingHelper.MainAppDirectory = appdir;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(staticServe))
+            {
+                if (Directory.Exists(staticServe))
+                {
+                    _console.Out.WriteLine("Static files directory is: " + appdir);
+                    HostingHelper.StaticServe = staticServe;
                 }
             }
 
@@ -74,6 +85,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                     .AddCommandLine(args).Build();
 
                 var contentRoot = Directory.GetCurrentDirectory();
+
 #if RELEASE
                 contentRoot = PathUtility.GetRootPath(true);
 #endif
@@ -87,10 +99,21 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 #if RELEASE
                 hostBuilder.UseWebRoot(PathUtility.GetRootPath());
 #endif
+
+                bool serveStatic = !string.IsNullOrEmpty(HostingHelper.StaticServe);
+                if (serveStatic)
+                {
+                    hostBuilder.UseWebRoot(HostingHelper.StaticServe);
+                }
+
                 var host = hostBuilder.Build();
 
-                var applicationLifetime = host.Services.GetService<IApplicationLifetime>();
-                applicationLifetime.ApplicationStarted.Register(ApplicationStarted);
+                if (!serveStatic)
+                {
+                    var applicationLifetime = host.Services.GetService<IApplicationLifetime>();
+                    applicationLifetime.ApplicationStarted.Register(ApplicationStarted);
+                }
+
                 host.Run();
             });
         }

@@ -511,8 +511,9 @@ form {
         color: #aaa;
         -webkit-box-shadow: inset 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
         box-shadow: inset 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
-        -webkit-border-radius: 20px;
-        border-radius: 20px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        width: 240px;
     }
 
         .navbar-form .form-control:focus {
@@ -961,14 +962,13 @@ header .nav.nav-pills {
 /* Sidebar */
 
 .sidebar {
-    /*width: 230px;*/
+    width: 260px;
     float: left;
     display: block;
     color: #777;
     position: relative;
     z-index: 60;
-    /*height: 100%;*/
-    height: auto;
+    height: 100%;
     box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);

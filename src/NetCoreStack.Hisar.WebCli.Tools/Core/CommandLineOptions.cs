@@ -14,6 +14,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public bool IsVerbose { get; private set; }
         public CommandOption MainAppDirectory { get; private set; }
 
+        public CommandOption StaticServe { get; private set; }
+
         public static CommandLineOptions Parse(string[] args, IConsole console)
         {
             if (args == null)
@@ -36,12 +38,11 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                 ExtendedHelpText = @"
 Remarks:
   Hisar WebCLI provides modular component development without dependencies.
-  NetCoreStack.Hisar supports any standalone MVC app that it can be part of 
-  hosting application package as a component. Please check out NetCoreStack.Hisar on Github for more details.
-  Each component-module should know what layout.cshtml looks like and then this tool can manage it for you.
-  If you don't specify the main application directory it will create the default _Layout.cshtml page.
+  You can manage all the files you specified on --appdir option or you can serve static files only.
+  If you don't specify the main application directory it will create a default _Layout.cshtml page.
 
   For example: dotnet hisar --appdir <the-full-path-of-your-main-app>
+               dotnet hisar --static <the-full-path-of-your-static-files>
 
 Examples:
   dotnet hisar
@@ -50,7 +51,11 @@ Examples:
             };
 
             app.HelpOption("-?|-h|--help");
-            var appdir = app.Option("-l|--appdir", "Main application directory that contains _Layout.cshtml page (Main Templating)", 
+
+            var appdir = app.Option("-l|--appdir", "Main application directory", 
+                CommandOptionType.SingleValue, inherited: true);
+
+            var staticServer = app.Option("-l|--static", "Static files serve",
                 CommandOptionType.SingleValue, inherited: true);
 
             var optVerbose = app.Option("-v|--verbose", "Show verbose output", CommandOptionType.NoValue);
@@ -67,7 +72,8 @@ Examples:
                 App = app,
                 IsVerbose = optVerbose.HasValue(),
                 IsHelp = app.IsShowingInformation,
-                MainAppDirectory = appdir
+                MainAppDirectory = appdir,
+                StaticServe = staticServer
             };
         }
     }

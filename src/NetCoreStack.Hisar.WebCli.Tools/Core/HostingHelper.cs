@@ -7,6 +7,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
     public static class HostingHelper
     {
         public static string MainAppDirectory { get; set; }
+        public static string StaticServe { get; set; }
 
         private static int HostingPort(int defaultPort = 0)
         {

@@ -11,4 +11,10 @@ namespace NetCoreStack.Hisar.WebCli.Tools.ViewModels
         public PageType PageType { get; set; }
         public DateTime UpdatedDate { get; set; }
     }
+
+    public class PageContentModel
+    {
+        public string Fullname { get; set; }
+        public string Content { get; set; }
+    }
 }

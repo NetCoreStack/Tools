@@ -7,6 +7,7 @@
     <title>Hisar Cli Tools</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/jstree/themes/default/style.css" rel="stylesheet" />
     <link href="/css/template.css" rel="stylesheet">
     <link href="/css/site.css" rel="stylesheet" />
     <style>
@@ -73,6 +74,7 @@
                 "knockout": "vendor/knockout/knockout.min",
                 "knockout-ace": "vendor/knockout/knockout-ace",
                 "ace": "vendor/ace",
+                "jstree": "vendor/jstree/jstree",
                 "tmpl": "vendor/blueimp-tmpl/js/tmpl.min",
                 "load-image": "vendor/blueimp-load-image/js/load-image",
                 "load-image-meta": "vendor/blueimp-load-image/js/load-image-meta",
@@ -113,6 +115,9 @@
             </div>
         </div>
     </header>
+    <div class="sidebar">
+        <div id="tree"></div>
+    </div>
     <div class="content" runat="server" id="container">
         <div class="mainbar" style="margin-left:0px; border:none;">
             <div class="matter">
@@ -126,7 +131,7 @@
         <div class="clearfix"></div>
     </div>
     <script>
-        require(["ace/ace", "ace/ext-language_tools", "app/main", 'app/pagemvvm'], function (ace) { });
+        require(["ace/ace", "jstree", "ace/ext-language_tools", "app/main", 'app/pagemvvm'], function (ace) { });
     </script>
 </body>
 </html>

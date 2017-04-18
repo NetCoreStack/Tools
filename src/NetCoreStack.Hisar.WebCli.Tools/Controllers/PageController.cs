@@ -15,6 +15,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 {
+    [Route("api/[controller]")]
     public class PageController : Controller
     {
         private readonly HisarCliContext _context;
@@ -26,7 +27,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             _connectionManager = connectionManager;
         }
 
-        [HttpGet]
+        [HttpGet(nameof(GetPage))]
         public IActionResult GetPage()
         {
             var pageViewModel = _context.Pages.Where(x => x.PageType == PageType.Layout)
@@ -42,7 +43,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             return Json(pageViewModel);
         }
 
-        [HttpPost]
+        [HttpPost(nameof(SavePage))]
         public async Task<IActionResult> SavePage([FromBody]PageViewModel model)
         {
             var page = new Page()
