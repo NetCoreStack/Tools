@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System;
 using NetCoreStack.Hisar.WebCli.Tools.Core;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using Microsoft.Net.Http.Headers;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 {
@@ -67,6 +70,30 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             }
 
             return Json(new WebResult<PageViewModel>(model));
+        }
+
+        [HttpGet(nameof(GetFile))]
+        [ResponseCache(CacheProfileName = "Never")]
+        public IActionResult GetFile([FromQuery]string fullname)
+        {
+            if (string.IsNullOrEmpty(fullname))
+            {
+                return BadRequest($"{nameof(fullname)} not speficied!");
+            }
+
+            var cliEnvironment = HttpContext.RequestServices.GetService<CliEnvironment>();
+            var path = Path.Combine(cliEnvironment.MainAppDirectoryWebRoot, fullname);
+            if (System.IO.File.Exists(path))
+            {
+                var name = Path.GetFileName(path);
+                var stream = new FileStream(path, FileMode.Open);
+                return new FileStreamResult(stream, new MediaTypeHeaderValue("text/plain"))
+                {
+                    FileDownloadName = name
+                };
+            }
+
+            return NotFound();
         }
     }
 }

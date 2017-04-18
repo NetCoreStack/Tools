@@ -19,6 +19,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public string WebRootPath { get; }
         public string ApplicationBasePath { get; }
         public string AppDirectory { get; }
+        public string MainAppDirectoryWebRoot { get; }
         public string DatabasePath { get; }
         public string Version { get; }
         public string AssemblyPath { get; }
@@ -37,6 +38,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             DatabasePath = cliEnv.DatabaseFullPath;
             Version = PlatformServices.Default.Application.ApplicationVersion;
             AssemblyPath = Assembly.GetEntryAssembly().Location;
+            MainAppDirectoryWebRoot = cliEnv.MainAppDirectoryWebRoot;
         }
 
         public IDictionary<string, object> ToJson()
@@ -50,6 +52,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             dictionary.Add(nameof(ApplicationBasePath), ApplicationBasePath.Replace("\\", "/"));
             dictionary.Add(nameof(AppDirectory), AppDirectory.Replace("\\", "/"));
             dictionary.Add(nameof(DatabasePath), DatabasePath.Replace("\\", "/"));
+            dictionary.Add(nameof(MainAppDirectoryWebRoot), MainAppDirectoryWebRoot.Replace("\\", "/"));
             dictionary.Add(nameof(Version), Version);
             dictionary.Add(nameof(AssemblyPath), AssemblyPath.Replace("\\", "/"));
             dictionary.Add(nameof(ContextDateTime), ContextDateTime);

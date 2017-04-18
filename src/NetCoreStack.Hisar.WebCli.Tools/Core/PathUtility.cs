@@ -37,6 +37,26 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             throw new Exception(message);
         }
 
+        public static string GetAppDirectoryWebRoot(string directory)
+        {
+            var directoryInfo = new DirectoryInfo(directory);
+            do
+            {
+                var path = Path.Combine(directoryInfo.FullName, "wwwroot");
+                var root = new DirectoryInfo(path);
+                if (root.Exists)
+                {
+                    return root.FullName;
+                }
+
+                directoryInfo = directoryInfo.Parent;
+            }
+            while (directoryInfo.Parent != null);
+
+            var message = $"Ex: wwwroot could not be located in {directory}";
+            throw new Exception(message);
+        }
+
         public static string GetLayoutPagePath(string directory)
         {
             if (string.IsNullOrEmpty(_layoutPagePath))

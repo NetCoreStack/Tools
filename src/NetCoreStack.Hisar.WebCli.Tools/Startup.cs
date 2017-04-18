@@ -11,6 +11,7 @@ using NetCoreStack.WebSockets;
 using Swashbuckle.Swagger.Model;
 using System.IO;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
 {
@@ -42,7 +43,13 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             Directory.CreateDirectory(appDirectory);
             var databaseFullPath = Path.Combine(appDirectory, HostingConstants.DatabaseName);
 
-            services.AddSingleton(new CliEnvironment(appDirectory, databaseFullPath));
+            var mainAppWebRoot = string.Empty;
+            if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
+            {
+                mainAppWebRoot = PathUtility.GetAppDirectoryWebRoot(HostingHelper.MainAppDirectory);
+            }
+
+            services.AddSingleton(new CliEnvironment(appDirectory, databaseFullPath, mainAppWebRoot));
 
             services.AddEntityFramework()
                 .AddEntityFrameworkSqlite()
@@ -67,7 +74,13 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 c.DescribeAllEnumsAsStrings();
             });
 
-            services.AddMvc();
+            services.AddMvc(options => {
+                options.CacheProfiles.Add("Never", new CacheProfile()
+                {
+                    Location = ResponseCacheLocation.None,
+                    NoStore = true
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
