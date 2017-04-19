@@ -6,7 +6,13 @@ hosting application package as a component. Please check out NetCoreStack.Hisar 
 Each component-module should know what layout.cshtml looks like and then this tool can manage it for you.
 If you don't specify the main application directory it will create the default _Layout.cshtml page.
 
-For example: dotnet hisar --appdir the-full-path-of-your-main-app
+For example: 
+
+    dotnet hisar --appdir the-full-path-of-your-main-app
+
+or serve static files only
+
+    dotnet hisar --static <the-full-path-of-your-static-files>
 
 ![](https://github.com/NetCoreStack/Tools/blob/master/NetCoreStackTools.gif)
 
