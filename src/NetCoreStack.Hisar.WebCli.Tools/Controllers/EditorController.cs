@@ -44,22 +44,35 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
         [HttpGet(nameof(GetDirectories))]
         public IActionResult GetDirectories()
         {
-            var directory = new DirectoryInfo(HostingHelper.MainAppDirectory);
-            if (directory.Exists)
+            if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
             {
-                var tree = new JsTreeDataModel
+                var directory = new DirectoryInfo(HostingHelper.MainAppDirectory);
+                if (directory.Exists)
                 {
-                    Text = directory.Name,
-                    Id = directory.FullName,
-                    Opened = "true",
-                    Type = "root"
-                };
+                    var tree = new JsTreeDataModel
+                    {
+                        Text = directory.Name,
+                        Id = directory.FullName,
+                        Opened = "true",
+                        Type = "root"
+                    };
 
-                PathUtility.TreeList = new List<JsTreeDataModel> { tree };
-                return Json(PathUtility.WalkDirectoryTree(directory, tree));
+                    PathUtility.TreeList = new List<JsTreeDataModel> { tree };
+                    return Json(PathUtility.WalkDirectoryTree(directory, tree));
+                }
             }
 
-            return NotFound();
+            var layoutRoot = new List<JsTreeDataModel> {
+              new JsTreeDataModel
+                {
+                    Text = HostingConstants.LayoutPageFullName,
+                    Id = HostingConstants.LayoutPageFullName,
+                    Opened = "true",
+                    Type = "root"
+                }
+            };
+
+            return Json(layoutRoot);
         }
 
         [HttpPost(nameof(SavePageContent))]

@@ -967,7 +967,6 @@ header .nav.nav-pills {
     display: block;
     color: #777;
     position: relative;
-    z-index: 60;
     height: 100%;
     box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
