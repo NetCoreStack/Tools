@@ -61,9 +61,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 
             _context.SaveChanges();
 
-            await _connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(page.Content), 
-                new RouteValueDictionary(new { fileupdated = model.Name }));
-            
+            await _connectionManager.BroadcastAsyncFileChanged(model.Content, model.Name);
+
             if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
             {
                 var layoutPagePath = PathUtility.GetLayoutPagePath(HostingHelper.MainAppDirectory);

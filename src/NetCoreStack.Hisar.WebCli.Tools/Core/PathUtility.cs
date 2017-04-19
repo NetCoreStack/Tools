@@ -78,6 +78,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             return _layoutPagePath;
         }
 
+        private static List<string> _excludeDirs = new List<string> { "bin", "obj", "node_modules" };
         public static List<JsTreeDataModel> TreeList = new List<JsTreeDataModel>();
         // TODO Cache
         public static List<JsTreeDataModel> WalkDirectoryTree(DirectoryInfo directory, JsTreeDataModel tree)
@@ -114,9 +115,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                     Type = "root"
                 };
 
-                tree.Children.Add(subDirectory);
-                // Resursive call for each subdirectory.
-                WalkDirectoryTree(dirInfo, subDirectory);
+                if (!_excludeDirs.Contains(dirInfo.Name))
+                {
+                    tree.Children.Add(subDirectory);
+                    // Resursive call for subdirectory.
+                    WalkDirectoryTree(dirInfo, subDirectory);
+                }                
             }
             
             return TreeList;

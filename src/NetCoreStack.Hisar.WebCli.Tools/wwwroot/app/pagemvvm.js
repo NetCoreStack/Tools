@@ -82,14 +82,14 @@
         "plugins": ['state', 'types', 'unique', 'themes', 'ui']
     }).on('changed.jstree', function (e, data) {
         var fullname = data.instance.get_selected()[0];
-        if (data.node && data.node.type == "file") {
+        var mode = fullname.split('.').pop();
+        if (data.node && data.node.type == "file" && mode != "dll") {
             $.ajax({
                 type: "GET",
                 cache: false,
                 url: "/api/editor/getfilecontent?fullname="+encodeURIComponent(fullname),
                 success: function (plaintext) {
                     var editor = ace.edit("editor");
-                    var mode = fullname.split('.').pop();
                     console.log("mode", mode);
                     if (mode == "cshtml") {
                         mode = "razor";

@@ -79,8 +79,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
         public async Task<IActionResult> SavePageContent([FromBody]PageContentModel model)
         {
             var connectionManager = HttpContext.RequestServices.GetService<IConnectionManager>();
-            await connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(model.Content),
-                new RouteValueDictionary(new { fileupdated = model.Fullname }));
+            await connectionManager.BroadcastAsyncFileChanged(model.Content, model.Fullname);
 
             if (System.IO.File.Exists(model.Fullname))
             {

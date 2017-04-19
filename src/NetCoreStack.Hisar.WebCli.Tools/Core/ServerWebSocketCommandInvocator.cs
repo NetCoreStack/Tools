@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreStack.Hisar.WebCli.Tools.Context;
+using System.IO;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
@@ -30,12 +31,19 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                 {
                     if (context.Header.TryGetValue("layoutrequest", out object layoutrequest))
                     {
+                        if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
+                        {
+                            var layoutPagePath = PathUtility.GetLayoutPagePath(HostingHelper.MainAppDirectory);
+                            var pageContent = File.ReadAllText(layoutPagePath);
+                            await _connectionManager.BroadcastAsyncFileChanged(pageContent, layoutPagePath);
+                            return;
+                        }
+
                         using (var scope = _applicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                         using (var db = scope.ServiceProvider.GetService<HisarCliContext>())
                         {
                             var page = db.Set<Page>().FirstOrDefault(x => x.PageType == PageType.Layout);
-                            await _connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(page.Content),
-                                new RouteValueDictionary(new { fileupdated = page.Name }));
+                            await _connectionManager.BroadcastAsyncFileChanged(page.Content, page.Name);
                         }
                     }
                 }
