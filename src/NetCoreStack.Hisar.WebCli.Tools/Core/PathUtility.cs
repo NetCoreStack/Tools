@@ -12,6 +12,41 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         private const string ContentFolderName = "content";
         private static string _layoutPagePath = string.Empty;
 
+        public static string NormalizeToWebPath(string filter)
+        {
+            return filter.Replace('\\', '/');
+        }
+
+        public static string NormalizeToOSPath(string filter, bool replaceStartsWithSlash = false)
+        {
+            if (replaceStartsWithSlash && (filter.StartsWith("\\") || filter.StartsWith("/")))
+            {
+                filter = filter.Substring(1);
+            }
+
+            return filter.Replace('/', '\\');
+        }
+
+        public static string NormalizeRelavitePath(string rootPath, string path)
+        {
+            if (string.IsNullOrEmpty(rootPath))
+            {
+                throw new ArgumentNullException(nameof(rootPath));
+            }
+
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            if (!Path.IsPathRooted(path))
+            {
+                return Path.Combine(rootPath, path);
+            }
+
+            return path;
+        }
+
         public static string GetRootPath(bool isContentRoot = false)
         {
             var assemblyPath = Assembly.GetEntryAssembly().Location;

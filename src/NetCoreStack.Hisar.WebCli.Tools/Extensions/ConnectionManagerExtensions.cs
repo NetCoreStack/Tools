@@ -13,10 +13,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             fullname = fullname.Replace(HostingHelper.MainAppDirectory, string.Empty);
             fullname = fullname.Replace("\\wwwroot", string.Empty);
 
-            if (fullname.StartsWith("\\"))
-            {
-                fullname = fullname.Substring(1);
-            }
+            fullname = PathUtility.NormalizeToWebPath(fullname);
 
             await connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(content),
                 new RouteValueDictionary(new { mainappdir = HostingHelper.MainAppDirectory, fileupdated = fullname }));

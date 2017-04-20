@@ -10,7 +10,7 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "commandLineArgs": "--layout C:\\Users\\gedem\\Codes\\NetCoreStack.Tools\\test\\Hosting\\Views\\Shared\\_Layout.cshtml",
+      "commandLineArgs": "--appdir ..\\..\\test\\Hosting",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -18,7 +18,7 @@
     },
     "Hisar.WebCli": {
       "commandName": "Project",
-      "commandLineArgs": "--appdir C:\\Users\\gedem\\Codes\\NetCoreStack.Hisar\\test\\Hosting",
+      "commandLineArgs": "--appdir ..\\..\\test\\Hosting",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

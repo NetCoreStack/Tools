@@ -81,6 +81,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
                 return BadRequest($"{nameof(fullname)} not speficied!");
             }
 
+            fullname = PathUtility.NormalizeToOSPath(fullname, true);
             var cliEnvironment = HttpContext.RequestServices.GetService<CliEnvironment>();
             var path = Path.Combine(cliEnvironment.MainAppDirectoryWebRoot, fullname);
             if (System.IO.File.Exists(path))

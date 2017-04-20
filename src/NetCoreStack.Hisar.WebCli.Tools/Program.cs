@@ -61,6 +61,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 if (Directory.Exists(appdir))
                 {
                     _console.Out.WriteLine("Main application directory is: " + appdir);
+
+                    appdir = PathUtility.NormalizeRelavitePath(Directory.GetCurrentDirectory(), appdir);
                     HostingHelper.MainAppDirectory = appdir;
                 }
             }
