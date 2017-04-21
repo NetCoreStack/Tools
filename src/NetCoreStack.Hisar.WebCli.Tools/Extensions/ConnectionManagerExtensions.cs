@@ -11,9 +11,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools
         public static async Task BroadcastAsyncFileChanged(this IConnectionManager connectionManager, string content, string fullname)
         {
             fullname = fullname.Replace(HostingHelper.MainAppDirectory, string.Empty);
-            fullname = fullname.Replace("\\wwwroot", string.Empty);
-
             fullname = PathUtility.NormalizeToWebPath(fullname);
+            fullname = fullname.Replace("/wwwroot", string.Empty);
 
             await connectionManager.BroadcastBinaryAsync(Encoding.UTF8.GetBytes(content),
                 new RouteValueDictionary(new { mainappdir = HostingHelper.MainAppDirectory, fileupdated = fullname }));

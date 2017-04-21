@@ -63,7 +63,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                     _console.Out.WriteLine("Main application directory is: " + appdir);
 
                     appdir = PathUtility.NormalizeRelavitePath(Directory.GetCurrentDirectory(), appdir);
-                    HostingHelper.MainAppDirectory = appdir;
+                    HostingHelper.MainAppDirectory = Path.GetFullPath(appdir);
                 }
             }
 

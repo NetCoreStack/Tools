@@ -14,6 +14,11 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 
         public static string NormalizeToWebPath(string filter)
         {
+            if (!filter.StartsWith("\\"))
+            {
+                filter = "\\" + filter;
+            }
+
             return filter.Replace('\\', '/');
         }
 
