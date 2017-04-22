@@ -31,10 +31,14 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             if (viewImport != null)
             {
                 var content = File.ReadAllText(viewImport.FullName);
+                var usingNamespace = $"@using {nameSpace}";
                 var searchFor = $"@using static {nameSpace}.ComponentInfo";
+
+                File.AppendAllText(viewImport.FullName, Environment.NewLine + usingNamespace + Environment.NewLine);
+
                 if (!content.Contains(searchFor))
                 {
-                    File.AppendAllText(viewImport.FullName, Environment.NewLine + searchFor);
+                    File.AppendAllText(viewImport.FullName, Environment.NewLine + searchFor + Environment.NewLine);
                 }
             }
         }
