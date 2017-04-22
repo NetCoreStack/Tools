@@ -1,15 +1,11 @@
 ﻿using Hisar.Component.Guideline.Filters;
-using NetCoreStack.Hisar;
-using NetCoreStack.Hisar.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetCoreStack.Data.Context;
+using NetCoreStack.Hisar;
 using System.IO;
-using NetCoreStack.WebSockets.ProxyClient;
-using Hisar.Component.Guideline.Core;
 
 namespace Hisar.Component.Guideline
 {
@@ -30,24 +26,18 @@ namespace Hisar.Component.Guideline
 
         public void ConfigureServices(IServiceCollection services)
         {
-#if DEBUG
-            services.AddProxyWebSockets(options => {
-                options.ConnectorName = $"{nameof(Guideline)}-Component";
-                options.WebSocketHostAddress = "localhost:1444"; // Hisar WebCLI socket
-                options.RegisterInvocator<DataStreamingInvocator>(NetCoreStack.WebSockets.WebSocketCommands.All);
-            });
+#if !RELEASE
+            services.AddCliSocket<Startup>();
 #endif
-
-            services.AddHisarMongoDbContext<MongoDbContext>(Configuration);
-
             services.AddMvc();
             services.AddSingleton<ILayoutFilter, GuidelineLayoutWebPackFilter>();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseStaticFiles();
-            app.UseProxyWebSockets();
+#if !RELEASE
+            app.UseCliProxy();
+#endif
             app.UseMvc(ConfigureRoutes);
         }
 

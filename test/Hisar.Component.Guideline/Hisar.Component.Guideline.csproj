@@ -19,12 +19,13 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
-    <Exec Command="xcopy /y $(ProjectDir)$(OutDir)*.dll $(SolutionDir)test\Hosting\ExternalComponents" />
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Condition=" '$(OS)' == 'Windows_NT'" Command="cd $(ProjectDir) &amp; dotnet hisar --build $(ProjectDir)" />
   </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' != 'Windows_NT' ">
-    <Exec Command="cp $(ProjectDir)$(OutDir)*.dll $(SolutionDir)test/Hosting/ExternalComponents" />
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Condition=" '$(OS)' == 'Windows_NT'" Command="xcopy /y $(ProjectDir)$(OutDir)*.dll $(SolutionDir)test\Hosting\ExternalComponents" />
+    <Exec Condition=" '$(OS)' != 'Windows_NT'" Command="cp $(ProjectDir)$(OutDir)*.dll $(SolutionDir)test/Hosting/ExternalComponents" />
   </Target>
 
   <ItemGroup>
@@ -32,14 +33,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
-    <PackageReference Include="NetCoreStack.Hisar" Version="1.0.0-preview-159" />
-    <PackageReference Include="NetCoreStack.Hisar.Server" Version="1.0.0-preview-159" />
+    <PackageReference Include="NetCoreStack.Hisar" Version="1.0.0-preview-181" />
+    <PackageReference Include="NetCoreStack.Hisar.Server" Version="1.0.0-preview-181" />
     <PackageReference Include="NetCoreStack.WebSockets.ProxyClient" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
-    <DotNetCliToolReference Include="NetCoreStack.Hisar.WebCli.Tools" Version="1.0.0-preview13" />
+    <DotNetCliToolReference Include="NetCoreStack.Hisar.WebCli.Tools" Version="1.0.0-preview21" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sample.ClassLibrary\Sample.ClassLibrary.csproj" />

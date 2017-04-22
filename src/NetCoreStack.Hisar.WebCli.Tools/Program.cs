@@ -17,6 +17,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
         private readonly IConsole _console;
         private readonly string _workingDir;
         private List<string> _urls;
+        private CommandLineOptions _cmdOptions;
 
         public Program(IConsole console, string workingDir)
         {
@@ -52,9 +53,14 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
         private async Task MainInternalAsync(string[] args)
         {
-            var cmdOptions = CommandLineOptions.Parse(args, _console);
-            var appdir = cmdOptions.MainAppDirectory.Value();
-            var staticServe = cmdOptions.StaticServe.Value();
+            _cmdOptions = CommandLineOptions.Parse(args, _console);
+            var appdir = _cmdOptions.MainAppDirectory.Value();
+            var staticServe = _cmdOptions.StaticServe.Value();
+            var componentBuild = _cmdOptions.BuildComponent.Value();
+
+            bool isAppDir = false;
+            bool isStaticServe = false;
+            bool isBuild = false;
 
             if (!string.IsNullOrEmpty(appdir))
             {
@@ -64,6 +70,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
                     appdir = PathUtility.NormalizeRelavitePath(Directory.GetCurrentDirectory(), appdir);
                     HostingHelper.MainAppDirectory = Path.GetFullPath(appdir);
+                    isAppDir = true;
                 }
             }
 
@@ -73,8 +80,36 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 {
                     _console.Out.WriteLine("Static files directory is: " + appdir);
                     HostingHelper.StaticServe = staticServe;
+                    isStaticServe = true;
                 }
             }
+
+            if (!string.IsNullOrEmpty(componentBuild))
+            {
+                if (Directory.Exists(componentBuild))
+                {
+                    isBuild = true;
+                }
+            }
+
+            if ((!isAppDir && !isStaticServe) && isBuild)
+            {
+                var componentDefinition = PathUtility.GetComponentInfo(componentBuild);
+                if (componentDefinition == null)
+                {
+                    _console.Out.WriteLine("Component build directory is: " + componentBuild + Environment.NewLine);
+                    _console.Out.WriteLine("===Build Waring: Component Definition could not be found!");
+                }
+
+                _console.Out.WriteLine("===Build: Hisar Cli - Resolved Component Id: " + componentDefinition.ComponentId);
+
+                // var replacers = ComponentBuildHelper.Build(componentDefinition);
+                // Parallel.Invoke(replacers.Select(p => new Action(p.Invoke)).ToArray());
+                // end of build
+                return;
+            }
+
+            _cmdOptions.App.ShowHelp();
 
             _urls = new List<string>()
             {
@@ -137,6 +172,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             }
             catch (Exception ex)
             {
+                _cmdOptions.App.ShowHelp();
                 await _console.Out.WriteLineAsync("Exception: " + ex?.Message);
 
                 if (ex is TaskCanceledException || ex is OperationCanceledException)

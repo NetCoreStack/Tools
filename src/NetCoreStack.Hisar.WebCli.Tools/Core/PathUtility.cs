@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
     public static class PathUtility
     {
         private const string ContentFolderName = "content";
-        private static string _layoutPagePath = string.Empty;
 
         public static string NormalizeToWebPath(string filter)
         {
@@ -79,7 +79,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             throw new Exception(message);
         }
 
-        public static string GetAppDirectoryWebRoot(string directory)
+        public static string GetWebRootDirectory(string directory)
         {
             var directoryInfo = new DirectoryInfo(directory);
             do
@@ -101,21 +101,46 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 
         public static string GetLayoutPagePath(string directory)
         {
-            if (string.IsNullOrEmpty(_layoutPagePath))
+            var name = Path.GetFileName(HostingConstants.LayoutPageFullName);
+            var files = Directory.GetFiles(directory, name, SearchOption.AllDirectories);
+            if (files.Any())
             {
-                var name = Path.GetFileName(HostingConstants.LayoutPageFullName);
-                var files = Directory.GetFiles(directory, name, SearchOption.AllDirectories);
-                if (files.Any())
-                {
-                    _layoutPagePath = files.FirstOrDefault();
-                    return _layoutPagePath;
-                }
-
-                var message = $"Ex: {HostingConstants.LayoutPageFullName} could not be located in {directory}";
-                throw new Exception(message);
+                var layoutPagePath = files.FirstOrDefault();
+                return layoutPagePath;
             }
 
-            return _layoutPagePath;
+            var message = $"Ex: {HostingConstants.LayoutPageFullName} could not be located in {directory}";
+            throw new Exception(message);
+        }
+
+        public static ComponentDefinition GetComponentInfo(string directory)
+        {
+            if (string.IsNullOrEmpty(directory))
+            {
+                throw new ArgumentNullException(nameof(directory));
+            }
+            
+            var files = Directory.GetFiles(directory, "*.csproj", SearchOption.AllDirectories);
+            if (files.Any())
+            {
+                var csprojFile = files.FirstOrDefault();
+                using (var fs = new FileStream(csprojFile, FileMode.Open))
+                {
+                    XDocument document = XDocument.Load(fs);
+                    var candidatePropertyGroup = document.Element("Project")?.Descendants("PropertyGroup")
+                        .Where(e => e.HasElements && e.Element("AssemblyName") != null).FirstOrDefault();
+
+                    var elementValue = candidatePropertyGroup?.Element("AssemblyName")?.Value;
+                    if (string.IsNullOrEmpty(elementValue))
+                    {
+                        elementValue = Path.GetFileNameWithoutExtension(csprojFile);
+                    }
+                    
+                    return new ComponentDefinition(elementValue, directory);
+                }
+            }
+
+            return null;
         }
 
         private static List<string> _excludeDirs = new List<string> { "bin", "obj", "node_modules" };
