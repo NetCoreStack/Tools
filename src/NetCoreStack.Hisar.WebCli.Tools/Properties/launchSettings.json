@@ -18,7 +18,7 @@
     },
     "Hisar.WebCli": {
       "commandName": "Project",
-      "commandLineArgs": "--build C:\\Users\\gedem\\Codes\\NetCoreStack.Tools\\test\\Hisar.Component.Guideline",
+      "commandLineArgs": "--appdir ..\\..\\test\\Hosting",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

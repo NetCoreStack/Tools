@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ComponentInfoFileContent" xml:space="preserve">
+    <value>// Hisar Cli auto generated component info class!
+using System.Reflection;
+using NetCoreStack.Hisar;
+
+namespace {0}
+{{
+    public static class ComponentInfo
+    {{
+        public static string ComponentId {{ get; }}
+
+        static ComponentInfo()
+        {{
+            typeof(ComponentInfo).GetTypeInfo().Assembly.GetComponentId();
+        }}
+    }}
+}}</value>
+  </data>
   <data name="DefaultPageContent" xml:space="preserve">
     <value>&lt;!doctype html&gt;
 &lt;html class="no-js" lang=""&gt;

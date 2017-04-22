@@ -5,6 +5,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
     public class ComponentDefinition
     {
+        public string Namespace { get; }
         public string ProjectDirectory { get; }
         public string ComponentId { get; }
 
@@ -20,6 +21,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                 throw new ArgumentNullException(nameof(assemblyName));
             }
 
+            Namespace = assemblyName;
             ComponentId = assemblyName.Split('.').Last();
             ProjectDirectory = projectDirectory;
         }

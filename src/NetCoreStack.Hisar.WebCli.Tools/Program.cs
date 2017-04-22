@@ -103,9 +103,15 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
                 _console.Out.WriteLine("===Build: Hisar Cli - Resolved Component Id: " + componentDefinition.ComponentId);
 
-                // var replacers = ComponentBuildHelper.Build(componentDefinition);
-                // Parallel.Invoke(replacers.Select(p => new Action(p.Invoke)).ToArray());
-                // end of build
+                var directory = componentDefinition.ProjectDirectory;
+                var nameSpace = componentDefinition.Namespace;
+                var startupFile = Path.Combine(directory, "Startup.Component.cs");
+                if (!File.Exists(startupFile))
+                {
+                    var componentStartup = string.Format(Properties.Resource.ComponentInfoFileContent, nameSpace);
+                    File.WriteAllText(startupFile, componentStartup);
+                }
+
                 return;
             }
 

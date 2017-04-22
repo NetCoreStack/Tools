@@ -62,6 +62,30 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to // Hisar Cli auto generated component info class!
+        ///using System.Reflection;
+        ///using NetCoreStack.Hisar;
+        ///
+        ///namespace {0}
+        ///{{
+        ///    public static class ComponentInfo
+        ///    {{
+        ///        public static string ComponentId {{ get; }}
+        ///
+        ///        static ComponentInfo()
+        ///        {{
+        ///            typeof(ComponentInfo).GetTypeInfo().Assembly.GetComponentId();
+        ///        }}
+        ///    }}
+        ///}}.
+        /// </summary>
+        public static string ComponentInfoFileContent {
+            get {
+                return ResourceManager.GetString("ComponentInfoFileContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!doctype html&gt;
         ///&lt;html class=&quot;no-js&quot; lang=&quot;&quot;&gt;
         ///    &lt;head&gt;
