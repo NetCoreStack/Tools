@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using NetCoreStack.WebSockets;
 using Swashbuckle.Swagger.Model;
 using System.IO;
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
@@ -46,7 +45,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             var mainAppWebRoot = string.Empty;
             if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
             {
-                mainAppWebRoot = PathUtility.GetAppDirectoryWebRoot(HostingHelper.MainAppDirectory);
+                mainAppWebRoot = PathUtility.GetWebRootDirectory(HostingHelper.MainAppDirectory);
             }
 
             services.AddSingleton(new CliEnvironment(appDirectory, databaseFullPath, mainAppWebRoot));

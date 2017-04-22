@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using NetCoreStack.Hisar;
-using System;
 
 namespace Hosting.Core
 {

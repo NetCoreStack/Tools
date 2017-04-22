@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.CommandLineUtils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
@@ -13,8 +10,8 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public bool IsHelp { get; private set; }
         public bool IsVerbose { get; private set; }
         public CommandOption MainAppDirectory { get; private set; }
-
         public CommandOption StaticServe { get; private set; }
+        public CommandOption BuildComponent { get; private set; }
 
         public static CommandLineOptions Parse(string[] args, IConsole console)
         {
@@ -37,22 +34,29 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                 AllowArgumentSeparator = true,
                 ExtendedHelpText = @"
 Remarks:
-  Hisar WebCLI provides modular component development without dependencies.
-  You can manage all the files you specified on --appdir option or you can serve static files only.
-  If you don't specify the main application directory it will create a default _Layout.cshtml page.
+  Hisar WebCli provides modular component development environements.
+  You can manage all the files you specified with --appdir option or serve static files with --static option.
+  However, NetCoreStack.Hisar rely on this tool to templating and create appropriate component packages.
+  If you don't specify the main application directory it will create a default simple _Layout.cshtml page.
 
   For example: dotnet hisar --appdir <the-full-path-of-your-main-app>
                dotnet hisar --static <the-full-path-of-your-static-files>
+               dotnet hisar --build  <the-component-project-directory> (MsBuild entegrated)
 
 Examples:
   dotnet hisar
-  dotnet hisar --appdir C:/users/codes/project/src/WebApp.Hosting
+  dotnet hisar --appdir C:/users/codes/project/src/Hisar.Hosting
+  dotnet hisar --static C:/users/codes/project/wwwroot
+  dotnet hisar --build C:/users/codes/project/src/Hisar.Component.Carousel
 "
             };
 
             app.HelpOption("-?|-h|--help");
 
             var appdir = app.Option("-l|--appdir", "Main application directory", 
+                CommandOptionType.SingleValue, inherited: true);
+
+            var buildComponent = app.Option("-l|--build", "Component directory",
                 CommandOptionType.SingleValue, inherited: true);
 
             var staticServer = app.Option("-l|--static", "Static files serve",
@@ -65,15 +69,14 @@ Examples:
                 console.Out.WriteLine("invalid args syntax");
             }
 
-            app.ShowHelp();
-
             return new CommandLineOptions
             {
                 App = app,
                 IsVerbose = optVerbose.HasValue(),
                 IsHelp = app.IsShowingInformation,
                 MainAppDirectory = appdir,
-                StaticServe = staticServer
+                StaticServe = staticServer,
+                BuildComponent = buildComponent
             };
         }
     }

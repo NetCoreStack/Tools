@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sample.ClassLibrary
+﻿namespace Sample.ClassLibrary
 {
     public class ExternalLibrary
     {

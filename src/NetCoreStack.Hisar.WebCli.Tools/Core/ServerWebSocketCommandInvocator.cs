@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Routing;
-using NetCoreStack.Hisar.WebCli.Tools.Models;
+﻿using NetCoreStack.Hisar.WebCli.Tools.Models;
 using NetCoreStack.WebSockets;
 using System;
 using System.Linq;
 using System.Net.WebSockets;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreStack.Hisar.WebCli.Tools.Context;
