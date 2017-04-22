@@ -94,24 +94,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
             if ((!isAppDir && !isStaticServe) && isBuild)
             {
-                var componentDefinition = PathUtility.GetComponentInfo(componentBuild);
-                if (componentDefinition == null)
-                {
-                    _console.Out.WriteLine("Component build directory is: " + componentBuild + Environment.NewLine);
-                    _console.Out.WriteLine("===Build Waring: Component Definition could not be found!");
-                }
-
-                _console.Out.WriteLine("===Build: Hisar Cli - Resolved Component Id: " + componentDefinition.ComponentId);
-
-                var directory = componentDefinition.ProjectDirectory;
-                var nameSpace = componentDefinition.Namespace;
-                var startupFile = Path.Combine(directory, "Startup.Component.cs");
-                if (!File.Exists(startupFile))
-                {
-                    var componentStartup = string.Format(Properties.Resource.ComponentInfoFileContent, nameSpace);
-                    File.WriteAllText(startupFile, componentStartup);
-                }
-
+                ComponentInfoBuilder.Build(_console, componentBuild);
                 return;
             }
 
