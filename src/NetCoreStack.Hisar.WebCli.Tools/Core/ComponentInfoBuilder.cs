@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
@@ -17,29 +16,14 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 
             console.Out.WriteLine("===Build: Hisar Cli - Resolved Component Id: " + componentDefinition.ComponentId);
 
+            var componentId = componentDefinition.ComponentId;
             var directory = componentDefinition.ProjectDirectory;
             var nameSpace = componentDefinition.Namespace;
             var startupFile = Path.Combine(directory, "Startup.Component.cs");
             if (!File.Exists(startupFile))
             {
-                var componentStartup = string.Format(Properties.Resource.ComponentInfoFileContent, nameSpace);
+                var componentStartup = string.Format(Properties.Resource.ComponentInfoFileContent, nameSpace, componentId);
                 File.WriteAllText(startupFile, componentStartup);
-            }
-
-            var directoryInfo = new DirectoryInfo(directory);
-            var viewImport = directoryInfo.GetFiles("_ViewImports.cshtml", SearchOption.AllDirectories).FirstOrDefault();
-            if (viewImport != null)
-            {
-                var content = File.ReadAllText(viewImport.FullName);
-                var usingNamespace = $"@using {nameSpace}";
-                var searchFor = $"@using static {nameSpace}.ComponentInfo";
-
-                File.AppendAllText(viewImport.FullName, Environment.NewLine + usingNamespace + Environment.NewLine);
-
-                if (!content.Contains(searchFor))
-                {
-                    File.AppendAllText(viewImport.FullName, Environment.NewLine + searchFor + Environment.NewLine);
-                }
             }
         }
     }

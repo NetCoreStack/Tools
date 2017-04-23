@@ -125,16 +125,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace {0}
 {{
-    public static class ComponentInfo
+    public static class Component
     {{
         public static string ComponentId {{ get; }}
+        private static string _prefixFormat = "~/{{0}}/";
 
-        static ComponentInfo()
+        static Component()
         {{
-            typeof(ComponentInfo).GetTypeInfo().Assembly.GetComponentId();
+            ComponentId = typeof(Component).GetTypeInfo().Assembly.GetComponentId();
         }}
 
-        public static string ComponentContent(this IUrlHelper urlHelper, string contentPath)
+        public static string Content(IUrlHelper urlHelper, string contentPath)
         {{
 #if !RELEASE
             var componentHelper = ComponentInfoHelper.GetComponentHelper(urlHelper.ActionContext);
@@ -146,6 +147,16 @@ namespace {0}
                 }}
             }}
 #endif
+            if (contentPath.StartsWith("/"))
+            {{
+                contentPath = contentPath.Substring(1);
+            }}
+            else if (contentPath.StartsWith("~/"))
+            {{
+                contentPath = contentPath.Substring(2);
+            }}
+
+            contentPath = contentPath.Insert(0, string.Format(_prefixFormat, ComponentId));
             return urlHelper.Content(contentPath);
         }}
     }}
