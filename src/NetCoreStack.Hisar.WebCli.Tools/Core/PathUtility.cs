@@ -14,6 +14,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 
         public static string NormalizeToWebPath(string filter)
         {
+            // OS forward slash check.
+            if(filter.StartsWith("/"))
+            {
+                return filter;
+            }
+            
             if (!filter.StartsWith("\\"))
             {
                 filter = "\\" + filter;
