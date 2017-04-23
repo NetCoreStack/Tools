@@ -5,20 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hisar.Component.Guideline
 {
-    public static class Component
+    public static class ComponentHelper
     {
         public static string ComponentId { get; }
-        private static string _prefixFormat = "~/{0}/";
 
-        static Component()
+        static ComponentHelper()
         {
-            ComponentId = typeof(Component).GetTypeInfo().Assembly.GetComponentId();
+            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
         }
 
         public static string Content(IUrlHelper urlHelper, string contentPath)
         {
 #if !RELEASE
-            var componentHelper = ComponentInfoHelper.GetComponentHelper(urlHelper.ActionContext);
+            var componentHelper = ComponentHelperBase.GetComponentHelper(urlHelper.ActionContext);
             if (componentHelper != null)
             {
                 if (componentHelper.IsExternalComponent)
@@ -27,17 +26,8 @@ namespace Hisar.Component.Guideline
                 }
             }
 #endif
-            if (contentPath.StartsWith("/"))
-            {
-                contentPath = contentPath.Substring(1);
-            }
-            else if (contentPath.StartsWith("~/"))
-            {
-                contentPath = contentPath.Substring(2);
-            }
 
-            contentPath = contentPath.Insert(0, string.Format(_prefixFormat, ComponentId));
-            return urlHelper.Content(contentPath);
+            return ComponentHelperBase.ResolveContentPath(urlHelper, ComponentId, contentPath);
         }
     }
 }

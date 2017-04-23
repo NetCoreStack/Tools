@@ -69,17 +69,18 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///
         ///namespace {0}
         ///{{
-        ///    public static class Component
+        ///    public static class ComponentHelper
         ///    {{
         ///        public static string ComponentId {{ get; }}
-        ///        private static string _prefixFormat = &quot;~/{{0}}/&quot;;
         ///
-        ///        static Component()
+        ///        static ComponentHelper()
         ///        {{
-        ///            ComponentId = typeof(Component).GetTypeInfo().Assembly.GetComponentId();
+        ///            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
         ///        }}
         ///
-        ///        public static string Content(IUrlHelper urlHelper [rest of string was truncated]&quot;;.
+        ///        public static string Content(IUrlHelper urlHelper, string contentPath)
+        ///        {{
+        ///#if !R [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ComponentInfoFileContent {
             get {

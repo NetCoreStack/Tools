@@ -7,44 +7,21 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\images\**" />
-    <Compile Remove="wwwroot\lib\**" />
-    <Content Remove="wwwroot\images\**" />
-    <Content Remove="wwwroot\lib\**" />
-    <EmbeddedResource Remove="wwwroot\images\**" />
-    <EmbeddedResource Remove="wwwroot\lib\**" />
-    <None Remove="wwwroot\images\**" />
-    <None Remove="wwwroot\lib\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\css\bootstrap.css" />
-    <Content Include="wwwroot\css\bootstrap.min.css" />
-    <Content Include="wwwroot\favicon.ico" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="wwwroot\js\bootstrap.js" />
-    <Content Include="wwwroot\js\bootstrap.min.js" />
-    <Content Include="wwwroot\js\jquery.js" />
-    <Content Include="wwwroot\js\main.js" />
-  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="NetCoreStack.Hisar" Version="1.0.0-preview-183" />
-    <PackageReference Include="NetCoreStack.Hisar.Server" Version="1.0.0-preview-183" />
+    <PackageReference Include="NetCoreStack.Hisar" Version="1.0.0-preview-185" />
+    <PackageReference Include="NetCoreStack.Hisar.Server" Version="1.0.0-preview-185" />
   </ItemGroup>
+  
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Update="ExternalComponents\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

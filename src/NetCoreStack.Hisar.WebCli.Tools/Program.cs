@@ -58,8 +58,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             var staticServe = _cmdOptions.StaticServe.Value();
             var componentBuild = _cmdOptions.BuildComponent.Value();
 
-            bool isAppDir = false;
-            bool isStaticServe = false;
             bool isBuild = false;
 
             if (!string.IsNullOrEmpty(appdir))
@@ -70,7 +68,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
                     appdir = PathUtility.NormalizeRelavitePath(Directory.GetCurrentDirectory(), appdir);
                     HostingHelper.MainAppDirectory = Path.GetFullPath(appdir);
-                    isAppDir = true;
                 }
             }
 
@@ -80,7 +77,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 {
                     _console.Out.WriteLine("Static files directory is: " + appdir);
                     HostingHelper.StaticServe = staticServe;
-                    isStaticServe = true;
                 }
             }
 
@@ -92,7 +88,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 }
             }
 
-            if ((!isAppDir && !isStaticServe) && isBuild)
+            if (isBuild)
             {
                 ComponentInfoBuilder.Build(_console, componentBuild);
                 return;
