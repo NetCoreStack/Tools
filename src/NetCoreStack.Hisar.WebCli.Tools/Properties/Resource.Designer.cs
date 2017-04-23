@@ -62,14 +62,35 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to // Hisar Cli auto generated component info class!
-        ///using System.Reflection;
-        ///using NetCoreStack.Hisar;
-        ///using Microsoft.AspNetCore.Mvc;
+        ///   Looks up a localized string similar to // Hisar Cli auto generated component class!
+        ///using System.Collections.Generic;
         ///
         ///namespace {0}
         ///{{
-        ///    public static class ComponentHelper
+        ///    public static partial class ComponentHelper
+        ///    {{
+        ///        public static readonly IDictionary&lt;string, string&gt; ComponentDependencies = new Dictionary&lt;string, string&gt;
+        ///        {{
+        ///            {1}
+        ///        }};
+        ///    }}
+        ///}}.
+        /// </summary>
+        public static string ComponentDependenciesFileContent {
+            get {
+                return ResourceManager.GetString("ComponentDependenciesFileContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to // Hisar Cli auto generated component class!
+        ///using Microsoft.AspNetCore.Mvc;
+        ///using NetCoreStack.Hisar;
+        ///using System.Reflection;
+        ///
+        ///namespace {0}
+        ///{{
+        ///    public static partial class ComponentHelper
         ///    {{
         ///        public static string ComponentId {{ get; }}
         ///
@@ -80,11 +101,11 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///
         ///        public static string Content(IUrlHelper urlHelper, string contentPath)
         ///        {{
-        ///#if !R [rest of string was truncated]&quot;;.
+        ///#if [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string ComponentInfoFileContent {
+        public static string ComponentFileContent {
             get {
-                return ResourceManager.GetString("ComponentInfoFileContent", resourceCulture);
+                return ResourceManager.GetString("ComponentFileContent", resourceCulture);
             }
         }
         

@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
@@ -19,12 +23,41 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             var componentId = componentDefinition.ComponentId;
             var directory = componentDefinition.ProjectDirectory;
             var nameSpace = componentDefinition.Namespace;
-            var startupFile = Path.Combine(directory, "Startup.Component.cs");
-            if (!File.Exists(startupFile))
+            var startupComponentFile = Path.Combine(directory, "Startup.Component.cs");
+            if (!File.Exists(startupComponentFile))
             {
-                var componentStartup = string.Format(Properties.Resource.ComponentInfoFileContent, nameSpace, componentId);
-                File.WriteAllText(startupFile, componentStartup);
+                var componentStartup = string.Format(Properties.Resource.ComponentFileContent, nameSpace, componentId);
+                File.WriteAllText(startupComponentFile, componentStartup);
             }
+
+            var startupComponentDependencies = Path.Combine(directory, "Startup.ComponentDependencies.cs");
+            StringBuilder sb = new StringBuilder();
+
+            var dependencies = componentDefinition.ComponentDependencies;
+            if (dependencies != null)
+            {
+                var firstKey = dependencies.First().Key;
+                var lastKey = dependencies.Last().Key;
+
+                foreach (KeyValuePair<string, string> entry in dependencies)
+                {
+                    if (entry.Key == firstKey)
+                    {
+                        sb.AppendLine($"[\"{entry.Key}\"] = \"{entry.Value}\",");
+                    }
+                    else if(entry.Key == lastKey)
+                    {
+                        sb.AppendLine($"\t\t\t[\"{entry.Key}\"] = \"{entry.Value}\"");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"\t\t\t[\"{entry.Key}\"] = \"{entry.Value}\",");
+                    }
+                }
+            }
+
+            var dependenciesContent = string.Format(Properties.Resource.ComponentDependenciesFileContent, nameSpace, sb.ToString());
+            File.WriteAllText(startupComponentDependencies, dependenciesContent);
         }
     }
 }

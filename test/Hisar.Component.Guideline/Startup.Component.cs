@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hisar.Component.Guideline
 {
-    public static class ComponentHelper
+    public static partial class ComponentHelper
     {
         public static string ComponentId { get; }
 

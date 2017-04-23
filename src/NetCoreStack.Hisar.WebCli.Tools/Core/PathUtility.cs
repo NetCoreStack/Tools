@@ -135,8 +135,10 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                     {
                         elementValue = Path.GetFileNameWithoutExtension(csprojFile);
                     }
-                    
-                    return new ComponentDefinition(elementValue, directory);
+
+                    var dependencyTree = document.Element("Project")?.Descendants("PackageReference").ToList();
+                    var dependencies = dependencyTree.ToDictionary(x => x.Attribute("Include").Value, x => x.Attribute("Version").Value);
+                    return new ComponentDefinition(elementValue, directory, dependencies);
                 }
             }
 
