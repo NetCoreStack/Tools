@@ -69,7 +69,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///{{
         ///    public static partial class ComponentHelper
         ///    {{
-        ///        public static readonly IDictionary&lt;string, string&gt; ComponentDependencies = new Dictionary&lt;string, string&gt;
+        ///        public static IReadOnlyDictionary&lt;string, string&gt; ComponentDependencies {{ get; }} = new Dictionary&lt;string, string&gt;
         ///        {{
         ///            {1}
         ///        }};

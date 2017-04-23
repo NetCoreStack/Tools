@@ -5,9 +5,11 @@ namespace Hisar.Component.Guideline
 {
     public static partial class ComponentHelper
     {
-        public static readonly IDictionary<string, string> ComponentDependencies = new Dictionary<string, string>
+        public static IReadOnlyDictionary<string, string> ComponentDependencies { get; } = new Dictionary<string, string>
         {
-            ["Microsoft.AspNetCore"] = "1.1.1",
+            ["AutoMapper"] = "6.0.2",
+			["AutoMapper.Extensions.Microsoft.DependencyInjection"] = "2.0.1",
+			["Microsoft.AspNetCore"] = "1.1.1",
 			["Microsoft.AspNetCore.Mvc"] = "1.1.2",
 			["Microsoft.AspNetCore.StaticFiles"] = "1.1.1",
 			["Microsoft.Extensions.Logging.Debug"] = "1.1.1",
