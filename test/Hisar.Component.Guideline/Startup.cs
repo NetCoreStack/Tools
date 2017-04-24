@@ -1,5 +1,4 @@
-﻿using Hisar.Component.Guideline.Filters;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +29,6 @@ namespace Hisar.Component.Guideline
             services.AddCliSocket<Startup>();
 #endif
             services.AddMvc();
-            services.AddSingleton<ILayoutFilter, GuidelineLayoutWebPackFilter>();
         }
 
         public void Configure(IApplicationBuilder app)
