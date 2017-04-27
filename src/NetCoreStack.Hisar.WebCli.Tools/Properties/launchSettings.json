@@ -18,7 +18,7 @@
     },
     "Hisar.WebCli": {
       "commandName": "Project",
-      "commandLineArgs": "--appdir ..\\..\\test\\Hosting",
+      "commandLineArgs": "--build ..\\..\\test\\Hisar.Component.Guideline",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

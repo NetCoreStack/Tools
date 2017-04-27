@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,6 +27,19 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             {
                 var componentStartup = string.Format(Properties.Resource.ComponentFileContent, nameSpace, componentId);
                 File.WriteAllText(startupComponentFile, componentStartup);
+            }
+
+            var directoryInfo = new DirectoryInfo(directory);
+            var viewImport = directoryInfo.GetFiles("_ViewImports.cshtml", SearchOption.AllDirectories).FirstOrDefault();
+            if (viewImport != null)
+            {
+                var content = File.ReadAllText(viewImport.FullName);
+                var searchFor = $"@using static {nameSpace}.ComponentHelper";
+
+                if (!content.Contains(searchFor))
+                {
+                    File.AppendAllText(viewImport.FullName, Environment.NewLine + searchFor);
+                }
             }
 
             var startupComponentDependencies = Path.Combine(directory, "Startup.ComponentDependencies.cs");

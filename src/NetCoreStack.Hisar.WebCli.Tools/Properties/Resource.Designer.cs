@@ -85,6 +85,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         /// <summary>
         ///   Looks up a localized string similar to // Hisar Cli auto generated component class!
         ///using Microsoft.AspNetCore.Mvc;
+        ///using Microsoft.AspNetCore.Mvc.ViewComponents;
         ///using NetCoreStack.Hisar;
         ///using System.Reflection;
         ///
@@ -99,9 +100,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
         ///        }}
         ///
-        ///        public static string Content(IUrlHelper urlHelper, string contentPath)
-        ///        {{
-        ///#if [rest of string was truncated]&quot;;.
+        ///        public static string Content(IUrlHelper [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ComponentFileContent {
             get {
