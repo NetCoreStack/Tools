@@ -140,7 +140,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using NetCoreStack.Hisar;
 using System.Reflection;
 
-namespace Hisar.Component.Guideline
+namespace {0}
 {{
     public static partial class ComponentHelper
     {{
@@ -151,7 +151,7 @@ namespace Hisar.Component.Guideline
             ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
         }}
 
-        public static string Content(IUrlHelper urlHelper, string contentPath)
+        public static string ComponentContent(this IUrlHelper urlHelper, string contentPath)
         {{
             if (ComponentHelperBase.IsExternalComponent(urlHelper.ActionContext))
             {{

@@ -90,7 +90,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///using NetCoreStack.Hisar;
         ///using System.Reflection;
         ///
-        ///namespace Hisar.Component.Guideline
+        ///namespace {0}
         ///{{
         ///    public static partial class ComponentHelper
         ///    {{
@@ -98,7 +98,10 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///
         ///        static ComponentHelper()
         ///        {{
-        ///            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId( [rest of string was truncated]&quot;;.
+        ///            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
+        ///        }}
+        ///
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ComponentFileContent {
             get {
