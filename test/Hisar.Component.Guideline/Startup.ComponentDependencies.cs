@@ -13,8 +13,8 @@ namespace Hisar.Component.Guideline
 			["Microsoft.AspNetCore.Mvc"] = "1.1.2",
 			["Microsoft.AspNetCore.StaticFiles"] = "1.1.1",
 			["Microsoft.Extensions.Logging.Debug"] = "1.1.1",
-			["NetCoreStack.Hisar"] = "1.0.0-preview-192",
-			["NetCoreStack.Hisar.Server"] = "1.0.0-preview-192",
+			["NetCoreStack.Hisar"] = "1.0.0-preview-196",
+			["NetCoreStack.Hisar.Server"] = "1.0.0-preview-196",
 			["NetCoreStack.WebSockets.ProxyClient"] = "1.0.1"
 
         };

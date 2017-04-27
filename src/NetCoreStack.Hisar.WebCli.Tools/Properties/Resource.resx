@@ -135,11 +135,12 @@ namespace {0}
   <data name="ComponentFileContent" xml:space="preserve">
     <value>// Hisar Cli auto generated component class!
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using NetCoreStack.Hisar;
 using System.Reflection;
 
-namespace {0}
+namespace Hisar.Component.Guideline
 {{
     public static partial class ComponentHelper
     {{
@@ -152,35 +153,30 @@ namespace {0}
 
         public static string Content(IUrlHelper urlHelper, string contentPath)
         {{
-#if !RELEASE
-            var componentHelper = ComponentHelperBase.GetComponentHelper(urlHelper.ActionContext);
-            if (componentHelper != null)
+            if (ComponentHelperBase.IsExternalComponent(urlHelper.ActionContext))
             {{
-                if (componentHelper.IsExternalComponent)
-                {{
-                    return urlHelper.Content(contentPath);
-                }}
+                return urlHelper.Content(contentPath);
             }}
-#endif
 
             return ComponentHelperBase.ResolveContentPath(urlHelper, ComponentId, contentPath);
         }}
-
-#pragma warning disable 0162
-        public static string ResolveName(string name)
+        
+        public static string ResolveName(this ViewContext context, string name)
         {{
-#if !RELEASE
-            return name;
-#endif
+            if (ComponentHelperBase.IsExternalComponent(context))
+            {{
+                return name;
+            }}
 
             return $"{{ComponentId}}.{{name}}";
         }}
 
-        public static string ResolveName&lt;TComponent&gt;()
+        public static string ResolveName&lt;TComponent&gt;(this ViewContext context)
         {{
-#if !RELEASE
-            return ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
-#endif
+            if (ComponentHelperBase.IsExternalComponent(context))
+            {{
+                return ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
+            }}
 
             var componentName = ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
             return $"{{ComponentId}}.{{componentName}}";
