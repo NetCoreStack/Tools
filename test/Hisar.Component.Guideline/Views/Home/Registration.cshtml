@@ -36,8 +36,8 @@
         </form>
         <br />
 
-        @await Component.InvokeAsync("Guideline")
-        @await Component.InvokeAsync("Guideline2")
+        @await Component.InvokeAsync(ViewContext.ResolveName("Guideline"))
+        @await Component.InvokeAsync(ViewContext.ResolveName("Guideline2"))
     </div>
 
     @section scripts {
