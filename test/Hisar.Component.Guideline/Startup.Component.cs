@@ -19,7 +19,7 @@ namespace Hisar.Component.Guideline
             _assemblyName = typeInfo.Assembly.GetName().Name;
         }
 
-        public static string Content(IUrlHelper urlHelper, string contentPath)
+        public static string ComponentContent(this IUrlHelper urlHelper, string contentPath)
         {
             if (ComponentHelperBase.IsExternalComponent(urlHelper.ActionContext))
             {
