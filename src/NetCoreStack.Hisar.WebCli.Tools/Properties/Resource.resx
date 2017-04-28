@@ -136,7 +136,6 @@ namespace {0}
     <value>// Hisar Cli auto generated component class!
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
 using NetCoreStack.Hisar;
 using System.Reflection;
 
@@ -156,33 +155,17 @@ namespace {0}
 
         public static string ComponentContent(this IUrlHelper urlHelper, string contentPath)
         {{
-            if (ComponentHelperBase.IsExternalComponent(urlHelper.ActionContext))
-            {{
-                return urlHelper.Content(contentPath);
-            }}
-
             return ComponentHelperBase.ResolveContentPath(urlHelper, ComponentId, contentPath);
         }}
         
         public static string ResolveName(this ViewContext context, string name)
         {{
-            if (ComponentHelperBase.IsExternalComponent(context))
-            {{
-                return name;
-            }}
-
-            return $"{{_assemblyName}}.{{name}}";
+            return ComponentHelperBase.ResolveViewComponentName(context, _assemblyName, name);
         }}
 
         public static string ResolveName&lt;TComponent&gt;(this ViewContext context)
         {{
-            if (ComponentHelperBase.IsExternalComponent(context))
-            {{
-                return ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
-            }}
-
-            var componentName = ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
-            return $"{{_assemblyName}}.{{componentName}}";
+            return ComponentHelperBase.ResolveViewComponentName&lt;TComponent&gt;(context, _assemblyName);
         }}
     }}
 }}</value>
