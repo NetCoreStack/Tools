@@ -95,13 +95,11 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         ///    public static partial class ComponentHelper
         ///    {{
         ///        public static string ComponentId {{ get; }}
+        ///        private static readonly string _assemblyName;
         ///
         ///        static ComponentHelper()
         ///        {{
-        ///            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
-        ///        }}
-        ///
-        ///     [rest of string was truncated]&quot;;.
+        ///            var typeInfo = typeof(ComponentHelper).GetT [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ComponentFileContent {
             get {

@@ -10,13 +10,16 @@ namespace Hisar.Component.Guideline
     public static partial class ComponentHelper
     {
         public static string ComponentId { get; }
+        private static readonly string _assemblyName;
 
         static ComponentHelper()
         {
-            ComponentId = typeof(ComponentHelper).GetTypeInfo().Assembly.GetComponentId();
+            var typeInfo = typeof(ComponentHelper).GetTypeInfo();
+            ComponentId = typeInfo.Assembly.GetComponentId();
+            _assemblyName = typeInfo.Assembly.GetName().Name;
         }
 
-        public static string ComponentContent(this IUrlHelper urlHelper, string contentPath)
+        public static string Content(IUrlHelper urlHelper, string contentPath)
         {
             if (ComponentHelperBase.IsExternalComponent(urlHelper.ActionContext))
             {
@@ -33,7 +36,7 @@ namespace Hisar.Component.Guideline
                 return name;
             }
 
-            return $"{ComponentId}.{name}";
+            return $"{_assemblyName}.{name}";
         }
 
         public static string ResolveName<TComponent>(this ViewContext context)
@@ -44,7 +47,7 @@ namespace Hisar.Component.Guideline
             }
 
             var componentName = ViewComponentConventions.GetComponentName(typeof(TComponent).GetTypeInfo());
-            return $"{ComponentId}.{componentName}";
+            return $"{_assemblyName}.{componentName}";
         }
     }
 }
