@@ -51,6 +51,16 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             });
         }
 
+        private static string NormalizePath(string path)
+        {
+            if (!string.IsNullOrEmpty(path) && path.EndsWith("\""))
+            {
+                path = path.Remove(path.Length - 1);
+            }
+
+            return path;
+        }
+
         private async Task MainInternalAsync(string[] args)
         {
             _cmdOptions = CommandLineOptions.Parse(args, _console);
@@ -58,10 +68,9 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             var staticServe = _cmdOptions.StaticServe.Value();
             var componentBuild = _cmdOptions.BuildComponent.Value();
 
-            bool isBuild = false;
-
             if (!string.IsNullOrEmpty(appdir))
             {
+                appdir = NormalizePath(appdir);
                 if (Directory.Exists(appdir))
                 {
                     _console.Out.WriteLine("Main application directory is: " + appdir);
@@ -73,24 +82,26 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
             if (!string.IsNullOrEmpty(staticServe))
             {
+                staticServe = NormalizePath(staticServe);
                 if (Directory.Exists(staticServe))
                 {
-                    _console.Out.WriteLine("Static files directory is: " + appdir);
+                    _console.Out.WriteLine("Static files directory is: " + staticServe);
                     HostingHelper.StaticServe = staticServe;
                 }
             }
 
             if (!string.IsNullOrEmpty(componentBuild))
             {
+                componentBuild = NormalizePath(componentBuild);
                 if (Directory.Exists(componentBuild))
                 {
-                    isBuild = true;
+                    ComponentInfoBuilder.Build(_console, componentBuild);
                 }
-            }
+                else
+                {
+                    _console.Out.WriteLine("=====Exiting: Build directory does not exist: " + componentBuild);
+                }
 
-            if (isBuild)
-            {
-                ComponentInfoBuilder.Build(_console, componentBuild);
                 return;
             }
 

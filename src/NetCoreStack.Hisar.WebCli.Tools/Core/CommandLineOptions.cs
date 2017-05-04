@@ -41,7 +41,7 @@ Remarks:
 
   For example: dotnet hisar --appdir <the-full-path-of-your-main-app>
                dotnet hisar --static <the-full-path-of-your-static-files>
-               dotnet hisar --build  <the-component-project-directory> (MsBuild entegrated)
+               dotnet hisar --build  <the-component-project-directory> (MsBuild integrated)
 
 Examples:
   dotnet hisar

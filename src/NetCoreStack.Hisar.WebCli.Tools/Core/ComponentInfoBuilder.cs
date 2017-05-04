@@ -14,10 +14,11 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             if (componentDefinition == null)
             {
                 console.Out.WriteLine("Component build directory is: " + projectDirectory + Environment.NewLine);
-                console.Out.WriteLine("===Build Waring: Component Definition could not be found!");
+                console.Out.WriteLine("=====Build Waring: Component Definition could not be found!");
             }
 
-            console.Out.WriteLine("===Build: Hisar Cli - Resolved Component Id: " + componentDefinition.ComponentId);
+            console.Out.WriteLine("=====Build: Hisar Cli - Resolved Component Id  : " + componentDefinition.ComponentId);
+            console.Out.WriteLine("=====Build: Hisar Cli - Project Directory      : " + componentDefinition.ProjectDirectory);
 
             var componentId = componentDefinition.ComponentId;
             var directory = componentDefinition.ProjectDirectory;
