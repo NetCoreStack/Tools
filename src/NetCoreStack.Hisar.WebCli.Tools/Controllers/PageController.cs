@@ -1,17 +1,17 @@
-﻿using NetCoreStack.Hisar.WebCli.Tools.Context;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.DependencyInjection;
+using NetCoreStack.Hisar.WebCli.Tools.Context;
+using NetCoreStack.Hisar.WebCli.Tools.Core;
 using NetCoreStack.Hisar.WebCli.Tools.Models;
 using NetCoreStack.Hisar.WebCli.Tools.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using NetCoreStack.WebSockets;
-using System.Linq;
-using System.Threading.Tasks;
 using System;
-using NetCoreStack.Hisar.WebCli.Tools.Core;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using Microsoft.Net.Http.Headers;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
 {
@@ -96,7 +96,18 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             {
                 var name = Path.GetFileName(path);
                 var stream = new FileStream(path, FileMode.Open);
-                return new FileStreamResult(stream, new MediaTypeHeaderValue("text/plain"))
+
+                string contentType;
+                var provider = new FileExtensionContentTypeProvider();
+                if(provider.TryGetContentType(name, out contentType))
+                {
+                    return new FileStreamResult(stream, contentType)
+                    {
+                        FileDownloadName = name
+                    };
+                }
+
+                return new FileStreamResult(stream, "text/plain")
                 {
                     FileDownloadName = name
                 };
