@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <AssemblyName>dotnet-hisar</AssemblyName>
-    <Description>Command line tool to build hisar app during development.</Description>
+    <Description>Command line tool to build hisar application and components.</Description>
     <PackageTags>dotnet;hisar</PackageTags>
     <PackageId>NetCoreStack.Hisar.WebCli.Tools</PackageId>
     <OutputType>exe</OutputType>
@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.1" />
