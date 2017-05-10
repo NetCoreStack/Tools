@@ -18,6 +18,7 @@
     },
     "Hisar.WebCli": {
       "commandName": "Project",
+      "commandLineArgs": "--appdir C:\\Users\\gedem\\Codes\\NetCoreStack.Hisar\\test\\Admin.Hosting",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
