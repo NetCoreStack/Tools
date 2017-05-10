@@ -185,11 +185,14 @@ namespace {0}
 
         &lt;link rel="stylesheet" href="css/normalize.css"&gt;
         &lt;link rel="stylesheet" href="css/main.css"&gt;
+        @RenderSection("styles", required: false)
         &lt;script src="js/vendor/modernizr-2.8.3.min.js"&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;!-- Add your site or application content here --&gt;
-        &lt;p&gt;Hello world!&lt;/p&gt;
+        &lt;p&gt;Content:&lt;/p&gt;
+        @RenderBody()
+        @RenderSection("scripts", required: false)
     &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
