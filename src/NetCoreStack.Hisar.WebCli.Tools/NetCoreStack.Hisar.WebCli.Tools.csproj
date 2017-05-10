@@ -21,7 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
-    <PackageReference Include="NetCoreStack.WebSockets" Version="1.0.1" />
+    <PackageReference Include="NetCoreStack.WebSockets" Version="1.0.3" />
     <PackageReference Include="NETStandard.Library" Version="1.6.1" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
   </ItemGroup>

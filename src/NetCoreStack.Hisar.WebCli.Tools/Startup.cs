@@ -1,16 +1,17 @@
-﻿using NetCoreStack.Hisar.WebCli.Tools.Context;
-using NetCoreStack.Hisar.WebCli.Tools.Core;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NetCoreStack.Hisar.WebCli.Tools.Context;
+using NetCoreStack.Hisar.WebCli.Tools.Core;
 using NetCoreStack.WebSockets;
 using Swashbuckle.Swagger.Model;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
 {
@@ -36,9 +37,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             services.AddOptions();
 
             services.AddSingleton(_ => Configuration);
+
+            ComponentDefinition componentInfo = PathUtility.GetComponentInfo(Directory.GetCurrentDirectory());
+            services.AddSingleton<ComponentDefinition>(componentInfo);
             services.AddSingleton<EnvironmentContext>();
 
-            var appDirectory = Path.Combine(Path.GetTempPath(), HostingConstants.PackageName.Replace(".",""));
+            var appDirectory = Path.Combine(Path.GetTempPath(), HostingConstants.PackageName.Replace(".", ""));
             Directory.CreateDirectory(appDirectory);
             var databaseFullPath = Path.Combine(appDirectory, HostingConstants.DatabaseName);
 
@@ -99,6 +103,14 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             app.UseNativeWebSockets();
 
             app.UseDefaultFiles();
+
+            var environmentContext = app.ApplicationServices.GetService<EnvironmentContext>();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new CustomFileProvider(environmentContext)
+            });
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -111,7 +123,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             app.UseSwagger();
             app.UseSwaggerUi();
 
-            DataInitializer.InitializeDb(app.ApplicationServices);
+            DataInitializer.InitializeDb(app.ApplicationServices, environmentContext);
         }
     }
 }

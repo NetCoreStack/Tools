@@ -15,7 +15,7 @@ namespace Hisar.Component.Guideline
 			["Microsoft.Extensions.Logging.Debug"] = "1.1.2",
 			["NetCoreStack.Hisar"] = "1.0.0-preview-228",
 			["NetCoreStack.Hisar.Server"] = "1.0.0-preview-228",
-			["NetCoreStack.WebSockets.ProxyClient"] = "1.0.1"
+			["NetCoreStack.WebSockets.ProxyClient"] = "1.0.3"
 
         };
     }

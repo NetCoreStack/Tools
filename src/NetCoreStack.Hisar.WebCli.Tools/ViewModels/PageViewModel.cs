@@ -8,6 +8,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
+        public string ComponentId { get; set; }
         public PageType PageType { get; set; }
         public DateTime UpdatedDate { get; set; }
     }

@@ -1,17 +1,16 @@
-﻿using NetCoreStack.Hisar.WebCli.Tools.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NetCoreStack.Hisar.WebCli.Tools.Core;
+using NetCoreStack.Hisar.WebCli.Tools.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NetCoreStack.Hisar.WebCli.Tools.Core;
-using System.IO;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Context
 {
     public class DataInitializer
     {
-        private static void InsertInitialDataFromResource(IServiceProvider serviceProvider)
+        private static void InsertInitialDataFromResource(IServiceProvider serviceProvider, EnvironmentContext context)
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             using (var db = scope.ServiceProvider.GetService<HisarCliContext>())
@@ -19,18 +18,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Context
                 var existPages = db.Set<Page>().ToList();
             }
 
-            var pageContent = Properties.Resource.DefaultPageContent;
-            if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
-            {
-                var layoutPagePath = PathUtility.GetLayoutPagePath(HostingHelper.MainAppDirectory);
-                pageContent = File.ReadAllText(layoutPagePath);
-            }
-
             var pages = new List<Page>()
             {
                 new Page
                 {
-                    Content = pageContent,
+                    ComponentId = context.ComponentInfo?.ComponentId,
+                    Content = Properties.Resource.DefaultPageContent,
                     Name = HostingConstants.LayoutPageFullName,
                     PageType = PageType.Layout,
                     UpdatedDate = DateTime.Now
@@ -67,13 +60,13 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Context
             }
         }
 
-        public static void InitializeDb(IServiceProvider serviceProvider)
+        public static void InitializeDb(IServiceProvider serviceProvider, EnvironmentContext context)
         {
             using (var db = serviceProvider.GetService<HisarCliContext>())
             {
                 if (db.Database.EnsureCreated())
                 {
-                    InsertInitialDataFromResource(serviceProvider);
+                    InsertInitialDataFromResource(serviceProvider, context);
                 }
             }
         }

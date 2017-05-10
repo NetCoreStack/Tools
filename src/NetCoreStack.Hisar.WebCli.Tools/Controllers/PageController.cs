@@ -10,7 +10,6 @@ using NetCoreStack.WebSockets;
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
@@ -28,12 +27,22 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
         }
 
         [HttpGet(nameof(GetPage))]
-        public IActionResult GetPage()
+        public IActionResult GetPage(string componentId)
         {
-            var pageViewModel = _context.Pages.Where(x => x.PageType == PageType.Layout)
-                .Select(p => new PageViewModel
+            var query = _context.Pages.Where(x => x.PageType == PageType.Layout);
+            if (!string.IsNullOrEmpty(componentId))
+            {
+                query = query.Where(p => p.ComponentId == componentId);
+                if (!query.Any())
+                {
+                    query = _context.Pages.Where(x => x.PageType == PageType.Layout);
+                }
+            }
+
+            var pageViewModel = query.Select(p => new PageViewModel
                 {
                     Id = p.Id,
+                    ComponentId = p.ComponentId,
                     Content = p.Content,
                     Name = p.Name,
                     PageType = p.PageType,
@@ -49,6 +58,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             var page = new Page()
             {
                 Content = model.Content,
+                ComponentId = model.ComponentId,
                 Id = model.Id,
                 Name = model.Name,
                 UpdatedDate = DateTime.Now
@@ -62,13 +72,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
             _context.SaveChanges();
 
             await _connectionManager.BroadcastAsyncFileChanged(model.Content, model.Name);
-
-            if (!string.IsNullOrEmpty(HostingHelper.MainAppDirectory))
-            {
-                var layoutPagePath = PathUtility.GetLayoutPagePath(HostingHelper.MainAppDirectory);
-                System.IO.File.WriteAllText(layoutPagePath, page.Content, Encoding.UTF8);
-            }
-
             return Json(new WebResult<PageViewModel>(model));
         }
 

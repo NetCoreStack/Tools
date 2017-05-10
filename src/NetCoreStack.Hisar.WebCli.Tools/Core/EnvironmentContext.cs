@@ -14,6 +14,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         protected IHostingEnvironment HostingEnvironment { get; }
 
         protected CliEnvironment CliEnvironment { get; }
+        public ComponentDefinition ComponentInfo { get; }
         public DateTime ContextDateTime { get; }
         public string EnvironmentName { get; }
         public string ContentRootPath { get; }
@@ -26,11 +27,15 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public string AssemblyPath { get; }
         public string ExecutionPath { get; }
 
-        public EnvironmentContext(IConfigurationRoot configuration, IHostingEnvironment env, CliEnvironment cliEnv)
+        public EnvironmentContext(IConfigurationRoot configuration, 
+            IHostingEnvironment env, 
+            CliEnvironment cliEnv, 
+            ComponentDefinition componentInfo)
         {
             HostingEnvironment = env;
             CliEnvironment = cliEnv;
             Configuration = configuration;
+            ComponentInfo = componentInfo;
             ContextDateTime = DateTime.Now;
             EnvironmentName = HostingEnvironment.EnvironmentName;
             ContentRootPath = HostingEnvironment.ContentRootPath;
@@ -60,6 +65,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             dictionary.Add(nameof(Version), Version);
             dictionary.Add(nameof(AssemblyPath), AssemblyPath.Replace("\\", "/"));
             dictionary.Add(nameof(ContextDateTime), ContextDateTime);
+            dictionary.Add(nameof(ComponentDefinition.ComponentId), ComponentInfo?.ComponentId);
 
             return dictionary;
         }
