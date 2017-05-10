@@ -1,4 +1,4 @@
 dotnet restore NetCoreStack.Tools.sln
 dotnet build NetCoreStack.Tools.sln
 cd src/NetCoreStack.Hisar.WebCli.Tools
-dotnet pack -o ../../nupkg --version-suffix preview48 -c Release
+dotnet pack -o ../../nupkg --version-suffix preview49 -c Release
