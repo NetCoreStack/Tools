@@ -172,28 +172,65 @@ namespace {0}
   </data>
   <data name="DefaultPageContent" xml:space="preserve">
     <value>&lt;!doctype html&gt;
-&lt;html class="no-js" lang=""&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"&gt;
-        &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
-        &lt;title&gt;&lt;/title&gt;
-        &lt;meta name="description" content=""&gt;
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
-
-        &lt;link rel="apple-touch-icon" href="apple-touch-icon.png"&gt;
-        &lt;!-- Place favicon.ico in the root directory --&gt;
-
-        &lt;link rel="stylesheet" href="css/normalize.css"&gt;
-        &lt;link rel="stylesheet" href="css/main.css"&gt;
-        @RenderSection("styles", required: false)
-        &lt;script src="js/vendor/modernizr-2.8.3.min.js"&gt;&lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;!-- Add your site or application content here --&gt;
-        &lt;p&gt;Content:&lt;/p&gt;
-        @RenderBody()
+&lt;html lang=""&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;meta name="description" content=""&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
+    &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.netcorestack.com/css/efe.all.min.css"&gt; 
+    @RenderSection("styles", required: false)
+    &lt;script src="http://cdn.netcorestack.com/js/bundle.min.js"&gt;&lt;/script&gt;    
+    &lt;script src="http://cdn.netcorestack.com/js/efe.all.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body style="padding-top: 80px;"&gt;
+    &lt;nav class="navbar navbar-default navbar-fixed-top"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="navbar-header"&gt;
+                &lt;button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"&gt;
+                    &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+                    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+                    &lt;span class="icon-bar"&gt;&lt;/span&gt;&lt;span class="icon-bar"&gt;&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;a class="navbar-brand" href="/"&gt;NetCoreStack App
+                &lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class="collapse navbar-collapse" id="navbar-collapse"&gt;
+                &lt;ul class="nav navbar-nav navbar-left"&gt;
+                    &lt;li class="active"&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#"&gt;Pages&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;ul class="nav navbar-nav navbar-right"&gt;
+                    &lt;li class="dropdown"&gt;
+                        &lt;a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"&gt;
+                            Actions &lt;span class="caret"&gt;&lt;/span&gt;
+                        &lt;/a&gt;
+                        &lt;ul class="dropdown-menu"&gt;
+                            &lt;li class="active"&gt;&lt;a href="#"&gt;Commit&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href="#"&gt;Fetch&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#"&gt;Sign Out&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;div class="container"&gt;
+        &lt;div class="jumbotron" style="padding-left: 5vw; padding-right: 5vw;"&gt;
+            &lt;h1&gt;NetCoreStack Hisar Demo App&lt;/h1&gt;
+            &lt;div class="lead"&gt;This layout demonstrates common usage of
+                &lt;a href="https://github.com/netcorestack" target="_blank"&gt;NetCoreStack Hisar Framework and Web Cli Tools&lt;/a&gt;.
+            &lt;/div&gt;
+            &lt;a class="btn btn-lg btn-primary" href="https://github.com/NetCoreStack/Hisar" target="_blank" title="View on GitHub"&gt;&lt;i class="fa fa-github"&gt;&lt;/i&gt;View on GitHub&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;hr /&gt;
+        @RenderBody() 
         @RenderSection("scripts", required: false)
-    &lt;/body&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
 </root>

@@ -109,19 +109,16 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!doctype html&gt;
-        ///&lt;html class=&quot;no-js&quot; lang=&quot;&quot;&gt;
-        ///    &lt;head&gt;
-        ///        &lt;meta charset=&quot;utf-8&quot;&gt;
-        ///        &lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;ie=edge&quot;&gt;
-        ///        &lt;title&gt;&lt;/title&gt;
-        ///        &lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;
-        ///        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-        ///
-        ///        &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;apple-touch-icon.png&quot;&gt;
-        ///        &lt;!-- Place favicon.ico in the root directory --&gt;
-        ///
-        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;css/normalize.css&quot;&gt;
-        ///        &lt;link rel=&quot;sty [rest of string was truncated]&quot;;.
+        ///&lt;html lang=&quot;&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot;&gt;
+        ///    &lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;ie=edge&quot;&gt;
+        ///    &lt;title&gt;&lt;/title&gt;
+        ///    &lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; hr [rest of string was truncated]&quot;;.
         /// </summary>
         public static string DefaultPageContent {
             get {

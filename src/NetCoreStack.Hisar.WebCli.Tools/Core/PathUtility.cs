@@ -28,6 +28,17 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             return filter.Replace('\\', '/');
         }
 
+        public static string GetTempDirectory() => Path.Combine(Path.GetTempPath(), HostingConstants.PackageName.Replace(".", ""));
+
+        public static void CleanTempDirectory()
+        {
+            var tempDir = GetTempDirectory();
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
+        }
+
         public static string NormalizeToOSPath(string filter, bool replaceStartsWithSlash = false)
         {
             if (replaceStartsWithSlash && (filter.StartsWith("\\") || filter.StartsWith("/")))

@@ -11,7 +11,6 @@ using NetCoreStack.Hisar.WebCli.Tools.Core;
 using NetCoreStack.WebSockets;
 using Swashbuckle.Swagger.Model;
 using System.IO;
-using System.Reflection;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
 {
@@ -42,7 +41,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             services.AddSingleton<ComponentDefinition>(componentInfo);
             services.AddSingleton<EnvironmentContext>();
 
-            var appDirectory = Path.Combine(Path.GetTempPath(), HostingConstants.PackageName.Replace(".", ""));
+            var appDirectory = PathUtility.GetTempDirectory();
             Directory.CreateDirectory(appDirectory);
             var databaseFullPath = Path.Combine(appDirectory, HostingConstants.DatabaseName);
 

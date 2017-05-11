@@ -67,6 +67,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools
             var appdir = _cmdOptions.MainAppDirectory.Value();
             var staticServe = _cmdOptions.StaticServe.Value();
             var componentBuild = _cmdOptions.BuildComponent.Value();
+            var cleanTemp = _cmdOptions.CleanTemp.HasValue();
+
+            if (cleanTemp)
+            {
+                PathUtility.CleanTempDirectory();
+            }
 
             if (!string.IsNullOrEmpty(appdir))
             {
@@ -114,16 +120,12 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
             await Task.Run(() =>
             {
-                var configuration = new ConfigurationBuilder()
-                    .AddCommandLine(args).Build();
-
                 var contentRoot = Directory.GetCurrentDirectory();
 
 #if RELEASE
                 contentRoot = PathUtility.GetRootPath(true);
 #endif
                 var hostBuilder = new WebHostBuilder()
-                    .UseConfiguration(configuration)
                     .UseContentRoot(contentRoot)
                     .UseUrls(_urls.ToArray())
                     .UseKestrel(options => options.AddServerHeader = false)

@@ -12,6 +12,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public CommandOption MainAppDirectory { get; private set; }
         public CommandOption StaticServe { get; private set; }
         public CommandOption BuildComponent { get; private set; }
+        public CommandOption CleanTemp { get; private set; }
 
         public static CommandLineOptions Parse(string[] args, IConsole console)
         {
@@ -53,13 +54,16 @@ Examples:
 
             app.HelpOption("-?|-h|--help");
 
-            var appdir = app.Option("-l|--appdir", "Main application directory", 
+            var appdir = app.Option("-a|--appdir", "Main application directory", 
                 CommandOptionType.SingleValue, inherited: true);
 
-            var buildComponent = app.Option("-l|--build", "Component directory",
+            var buildComponent = app.Option("-b|--build", "Component directory",
                 CommandOptionType.SingleValue, inherited: true);
 
-            var staticServer = app.Option("-l|--static", "Static files serve",
+            var cleanTemp = app.Option("-c|--clean", "To clean NetCoreStackHisarWebCliTools temp directory and SQLite data which stores Layout.cshtml(s)",
+                CommandOptionType.NoValue);
+
+            var staticServer = app.Option("-s|--static", "Static files serve",
                 CommandOptionType.SingleValue, inherited: true);
 
             var optVerbose = app.Option("-v|--verbose", "Show verbose output", CommandOptionType.NoValue);
@@ -76,7 +80,8 @@ Examples:
                 IsHelp = app.IsShowingInformation,
                 MainAppDirectory = appdir,
                 StaticServe = staticServer,
-                BuildComponent = buildComponent
+                BuildComponent = buildComponent,
+                CleanTemp = cleanTemp
             };
         }
     }
