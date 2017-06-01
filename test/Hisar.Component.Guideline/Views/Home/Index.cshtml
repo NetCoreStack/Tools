@@ -7,3 +7,9 @@
 @await Component.InvokeAsync(ViewContext.ResolveName("Guideline2"))
 <hr />
 @ViewBag.ExternalLibrary
+
+<component-scripts>
+    <script>
+        console.log($.fn.jquery);
+    </script>
+</component-scripts>

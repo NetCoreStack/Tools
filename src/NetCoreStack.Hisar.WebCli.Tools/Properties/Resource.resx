@@ -228,8 +228,9 @@ namespace {0}
         &lt;/div&gt;
         &lt;hr /&gt;
         @RenderBody() 
-        @RenderSection("scripts", required: false)
     &lt;/div&gt;
+    @RenderSection("scripts", required: false)
+    @{ await Html.RenderComponentsScriptsAsync(); }
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
