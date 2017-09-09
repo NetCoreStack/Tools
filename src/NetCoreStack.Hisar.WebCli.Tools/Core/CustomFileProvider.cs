@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.FileProviders.Embedded;
-using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
