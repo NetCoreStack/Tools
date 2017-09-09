@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using NetCoreStack.Hisar.WebCli.Tools.Context;
 using NetCoreStack.Hisar.WebCli.Tools.Core;
 using NetCoreStack.WebSockets;
-using Swashbuckle.Swagger.Model;
 using System.IO;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
@@ -53,28 +52,13 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
             services.AddSingleton(new CliEnvironment(appDirectory, databaseFullPath, mainAppWebRoot));
 
-            services.AddEntityFramework()
-                .AddEntityFrameworkSqlite()
+            services.AddEntityFrameworkSqlite()
                 .AddDbContext<HisarCliContext>(options =>
                 {
                     options.UseSqlite($"Data Source={databaseFullPath}");
                 });
 
-            services.AddNativeWebSockets(options => {
-                options.RegisterInvocator<ServerWebSocketCommandInvocator>(WebSocketCommands.All);
-            });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SingleApiVersion(new Info
-                {
-                    Version = "v1",
-                    Title = "API V1",
-                    TermsOfService = "None"
-                });
-
-                c.DescribeAllEnumsAsStrings();
-            });
+            services.AddNativeWebSockets<ServerWebSocketCommandInvocator>();
 
             services.AddMvc(options => {
                 options.CacheProfiles.Add("Never", new CacheProfile()
@@ -118,9 +102,6 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.UseSwagger();
-            app.UseSwaggerUi();
 
             DataInitializer.InitializeDb(app.ApplicationServices, environmentContext);
         }
