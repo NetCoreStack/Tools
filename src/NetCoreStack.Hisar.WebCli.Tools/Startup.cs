@@ -15,26 +15,17 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMemoryCache();
-
             services.AddOptions();
-
-            services.AddSingleton(_ => Configuration);
+            services.AddMemoryCache();
 
             ComponentDefinition componentInfo = PathUtility.GetComponentInfo(Directory.GetCurrentDirectory());
             services.AddSingleton<ComponentDefinition>(componentInfo);

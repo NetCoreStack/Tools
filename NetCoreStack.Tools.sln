@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hisar.Component.Guideline", "test\Hisar.Component.Guideline\Hisar.Component.Guideline.csproj", "{A4BF6539-6DB0-41AE-B975-BE68C287F596}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{F26FC8F9-35AC-42BB-B753-5479AE331BDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hisar.Component.Guideline", "test\Hisar.Component.Guideline\Hisar.Component.Guideline.csproj", "{A4BF6539-6DB0-41AE-B975-BE68C287F596}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreStack.Hisar.WebCli.Tools", "src\NetCoreStack.Hisar.WebCli.Tools\NetCoreStack.Hisar.WebCli.Tools.csproj", "{AB4802ED-C833-4910-90A2-F7BCBFFDDE8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hosting", "test\Hosting\Hosting.csproj", "{34D3E2BB-CDE4-47E9-BC88-03405690FD4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hosting", "test\Hosting\Hosting.csproj", "{34D3E2BB-CDE4-47E9-BC88-03405690FD4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.ClassLibrary", "test\Sample.ClassLibrary\Sample.ClassLibrary.csproj", "{D2ED6859-2529-4138-BCCD-058C7515F697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ClassLibrary", "test\Sample.ClassLibrary\Sample.ClassLibrary.csproj", "{D2ED6859-2529-4138-BCCD-058C7515F697}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{333ABB73-AF3B-4DBC-BC22-B80067370547}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,5 +56,9 @@ Global
 		{AB4802ED-C833-4910-90A2-F7BCBFFDDE8B} = {D91FD736-6D6D-4C70-9325-59F6CCDA50C6}
 		{34D3E2BB-CDE4-47E9-BC88-03405690FD4B} = {3D4B19BA-7CBB-44B1-86DD-9861C5A58F79}
 		{D2ED6859-2529-4138-BCCD-058C7515F697} = {3D4B19BA-7CBB-44B1-86DD-9861C5A58F79}
+		{333ABB73-AF3B-4DBC-BC22-B80067370547} = {FFBB6B34-CE1C-47FA-8070-FD724EE131F2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B0AB439-F8F4-4F29-A050-E8EA25EC5A02}
 	EndGlobalSection
 EndGlobal

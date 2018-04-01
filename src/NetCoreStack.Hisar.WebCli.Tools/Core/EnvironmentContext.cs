@@ -10,7 +10,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
 {
     public class EnvironmentContext
     {
-        protected IConfigurationRoot Configuration { get; }
+        protected IConfiguration Configuration { get; }
         protected IHostingEnvironment HostingEnvironment { get; }
 
         protected CliEnvironment CliEnvironment { get; }
@@ -27,7 +27,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
         public string AssemblyPath { get; }
         public string ExecutionPath { get; }
 
-        public EnvironmentContext(IConfigurationRoot configuration, 
+        public EnvironmentContext(IConfiguration configuration, 
             IHostingEnvironment env, 
             CliEnvironment cliEnv, 
             ComponentDefinition componentInfo)
