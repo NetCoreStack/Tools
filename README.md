@@ -1,4 +1,7 @@
 ### Hisar Web CLI Tools: Cross-Platform Modular Component Development Web CLI
+[![NuGet](https://img.shields.io/nuget/v/NetCoreStack.Hisar.WebCli.Tools.svg?longCache=true&style=flat-square)](https://www.nuget.org/packages/NetCoreStack.Hisar.WebCli.Tools)
+[![NuGet](https://img.shields.io/nuget/dt/NetCoreStack.Hisar.WebCli.Tools.svg?longCache=true&style=flat-square)](https://www.nuget.org/packages/NetCoreStack.Hisar.WebCli.Tools)
+
 
 Hisar WebCLI provides modular component development without dependencies.
 [NetCoreStack.Hisar](https://github.com/NetCoreStack/Hisar) supports any standalone MVC app that it can be part of 
