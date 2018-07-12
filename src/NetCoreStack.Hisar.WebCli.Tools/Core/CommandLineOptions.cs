@@ -63,7 +63,7 @@ Examples:
             var cleanTemp = app.Option("-c|--clean", "To clean NetCoreStackHisarWebCliTools temp directory and SQLite data which stores Layout.cshtml(s)",
                 CommandOptionType.NoValue);
 
-            var staticServer = app.Option("-s|--static", "Static files serve",
+            var staticServer = app.Option("-s|--static", "It launches a server in the current working directory and serves all files in it",
                 CommandOptionType.SingleValue, inherited: true);
 
             var optVerbose = app.Option("-v|--verbose", "Show verbose output", CommandOptionType.NoValue);

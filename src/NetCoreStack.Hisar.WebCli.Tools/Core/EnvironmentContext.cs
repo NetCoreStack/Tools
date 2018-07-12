@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,10 +39,10 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
             EnvironmentName = HostingEnvironment.EnvironmentName;
             ContentRootPath = HostingEnvironment.ContentRootPath;
             WebRootPath = HostingEnvironment.WebRootPath;
-            ApplicationBasePath = PlatformServices.Default.Application.ApplicationBasePath;
+            ApplicationBasePath = AppDomain.CurrentDomain.BaseDirectory;
             AppDirectory = cliEnv.AppDirectory;
             DatabasePath = cliEnv.DatabaseFullPath;
-            Version = PlatformServices.Default.Application.ApplicationVersion;
+            Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
             AssemblyPath = Assembly.GetEntryAssembly().Location;
             MainAppDirectoryWebRoot = cliEnv.MainAppDirectoryWebRoot;
             ExecutionPath = Directory.GetCurrentDirectory();

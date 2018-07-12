@@ -1,24 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>dotnet-hisar</AssemblyName>
-    <Description>Command line tool to build hisar application and components.</Description>
-    <PackageTags>dotnet;hisar</PackageTags>
-    <PackageId>NetCoreStack.Hisar.WebCli.Tools</PackageId>
-    <OutputType>exe</OutputType>
-    <PackageType>DotnetCliTool</PackageType>
-    <IsPackable>True</IsPackable>
+    <Description>Global tool to build Hisar web application and components.</Description>
+    <PackageTags>dotnet, global tools, hisar</PackageTags>
+    <OutputType>Exe</OutputType>
+    <IsPackable>true</IsPackable>
+    <PackAsTool>true</PackAsTool>
+    <DebugType>embedded</DebugType>
+    <RootNamespace>NetCoreStack.Hisar.WebCli.Tools</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
-    <PackageReference Include="NetCoreStack.WebSockets" Version="2.3.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+    <PackageReference Include="NetCoreStack.WebSockets" Version="2.4.0" />
   </ItemGroup>
   
   <ItemGroup>

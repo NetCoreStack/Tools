@@ -154,7 +154,9 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Core
                     }
 
                     var dependencyTree = document.Element("Project")?.Descendants("PackageReference").ToList();
-                    var dependencies = dependencyTree.ToDictionary(x => x.Attribute("Include").Value, x => x.Attribute("Version").Value);
+                    var dependencies = dependencyTree.Where(t => t.Attribute("Version") != null)
+                        .ToDictionary(x => x.Attribute("Include").Value, x => x.Attribute("Version").Value);
+
                     return new ComponentDefinition(elementValue, directory, dependencies);
                 }
             }
