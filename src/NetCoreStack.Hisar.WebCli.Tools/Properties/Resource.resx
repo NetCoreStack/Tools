@@ -230,7 +230,7 @@ namespace {0}
         @RenderBody() 
     &lt;/div&gt;
     @RenderSection("scripts", required: false)
-    @{ await Html.RenderComponentsScriptsAsync(); }
+    @{ await NetCoreStack.Hisar.HtmlHelperExtensions.RenderComponentsScriptsAsync(Html); }
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
