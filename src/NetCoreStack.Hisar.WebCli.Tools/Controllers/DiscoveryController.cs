@@ -56,7 +56,7 @@ namespace NetCoreStack.Hisar.WebCli.Tools.Controllers
         public IActionResult GetConnections()
         {
             var connections = _connectionManager.Connections
-                .Select(x => new { ConnectionId = x.Value.ConnectionId, ConnectorName = x.Value.ConnectorName });
+                .Select(x => new { ConnectionId = x.Value.ConnectionId, ConnectorName = x.Value.ConnectorName, State = x.Value.WebSocket.State });
 
             return Json(connections);
         }

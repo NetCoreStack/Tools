@@ -51,20 +51,18 @@ namespace NetCoreStack.Hisar.WebCli.Tools
 
             services.AddNativeWebSockets<ServerWebSocketCommandInvocator>();
 
-            services.AddMvc(options => {
+            services.AddMvc(options =>
+            {
                 options.CacheProfiles.Add("Never", new CacheProfile()
                 {
                     Location = ResponseCacheLocation.None,
                     NoStore = true
                 });
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

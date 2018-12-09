@@ -11,9 +11,9 @@ If you don't specify the main application directory it will create the default _
 
 
 ### Install
-Download the .NET Core SDK 2.1.0 or newer. Once installed, run this command:
+Download the .NET Core SDK 2.2.0 or newer. Once installed, run this command:
 
-	dotnet tool install --global dotnet-hisar --version 2.1.1
+	dotnet tool install --global dotnet-hisar --version 2.2.0
 
 ### Usage
 

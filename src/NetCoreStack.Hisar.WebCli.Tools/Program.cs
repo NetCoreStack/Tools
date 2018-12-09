@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace NetCoreStack.Hisar.WebCli.Tools
 {
@@ -126,10 +127,27 @@ namespace NetCoreStack.Hisar.WebCli.Tools
                 contentRoot = PathUtility.GetRootPath(true);
 #endif
                 var hostBuilder = new WebHostBuilder()
+                    .UseKestrel(options => options.AddServerHeader = false)
                     .UseContentRoot(contentRoot)
                     .UseUrls(_urls.ToArray())
-                    .UseKestrel(options => options.AddServerHeader = false)
-                    .UseIISIntegration()
+                    .ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        var env = hostingContext.HostingEnvironment;
+                        config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                              .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
+                                  optional: true, reloadOnChange: true);
+
+                        config.AddEnvironmentVariables();
+                    })
+                    .ConfigureLogging((webHostBuilderContext, logging) =>
+                    {
+                        IConfiguration configuration = webHostBuilderContext.Configuration;
+                        ILoggingBuilder loggerBuilder = logging;
+
+                        loggerBuilder.AddConfiguration(configuration.GetSection("Logging"));
+                        loggerBuilder.AddConsole();
+                        loggerBuilder.AddDebug();
+                    })
                     .UseStartup<Startup>();
 #if RELEASE
                 hostBuilder.UseWebRoot(PathUtility.GetRootPath());
